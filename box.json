@@ -1,0 +1,18 @@
+{
+    "estoqueEntrada":[{
+        "Devolução do Cliente":"Estoque_EstoqueDevolucao",
+        "Compra":"Estoque_EstoqueCompra",
+        "Ajuste de Estoque":"Estoque_EstoqueAjuste"
+    }],
+    "cadastroCliente":[{
+        "Cliente Pessoa Física":"Cadastro_CadCliente",
+        "Cliente Pessoa Jurídica":"Cadastro_CadClientePj"
+    }],
+    "consultaCliente":[{
+        "Cliente Pessoa Física":"Consulta_ConsultaCliente",
+        "Cliente Pessoa Jurídica":"Consulta_ConsultaClientePj"
+    }],
+    "estoqueSaida":[{
+        "Venda":"Estoque_EstoqueVenda"
+    }]
+}

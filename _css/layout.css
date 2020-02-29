@@ -1,0 +1,181 @@
+html,body{
+    height: 100%;
+}
+body{
+    font-family: sans-serif, serif;
+    margin:0;padding:0;
+}
+
+.barra_superior{
+    width:100%;
+    height: 80px;
+    border: 1px solid #333; 
+}
+/*
+Inicio: Layout dos items e menu
+*/
+.conteudo{ width: 80%; height: 100%; float: right; }
+.menu{ width: 20%; float: left;}
+.sub-menu{ width: 100%;}
+.menu, .sub-menu{
+    
+    position: relative;
+    cursor: pointer;
+    list-style: none;
+    padding: 0; margin: 0;
+    
+    font-size: 1.1em;
+}
+
+.sub-menu{
+    display: none;
+    
+    transform: scaleY(0);
+    transition: .4s;
+}
+
+.item, .sub-menu-item{
+    padding: 10px;
+    text-align: center;
+    color: #ddd;
+}
+
+.item{
+    background-color: rgb(80,80,80);
+}
+.sub-menu-item{
+    background-color: rgb(100,100,100);
+    border-bottom: 1px solid #333;
+}
+.menu a{
+    color: #ddd;
+    text-decoration: none;
+    transition: .4s;
+}
+.menu .item:hover > a{
+    color: rgb(200,50,50);
+}
+.sub-menu .sub-menu-item:hover a{
+    color: rgb(200,50,50);
+}
+.menu .item:hover .sub-menu{
+    display: block;
+    transform: scaleY(1);
+}
+#frame_conteudo{
+    padding: 10px;
+}
+label{
+    margin-right: 10px;
+}
+.txtBox{
+    margin: 6px 5px;
+
+    border-radius: 10px;
+    height: 30px;
+    border: 1px solid #d3d3d3;
+    outline: none;
+    padding: 0 5px;
+    font-size: 1.1em;
+    color : #333;
+}
+input[type="text"]{
+    width: 400px;
+}
+
+input[type="number"]{
+    width: 180px;
+}
+
+input[type="date"]{
+    width: 150px;
+}
+input[type="checkbox"]{
+    margin: 10px 5px;
+}
+.form_titulo{
+    font-size: 1.6em;
+    font-style: italic;
+    text-align: center;
+    color:cadetblue;
+}
+#btnCadastrar{
+    display: block;
+    width: 90%;
+    height: 40px;
+    margin: 10px auto;
+    background-color: azure;
+    border-radius: 10px;
+    font-size: 1.2em;
+    color : #333;
+    outline: none;
+    transition: .4s;
+}
+#btnCadastrar:hover{
+    background-color: cadetblue;
+    color: #d3d3d3;
+}
+.separator{
+    font-size: 1.25em;
+    margin-left: 10px;
+}
+/*
+Fim: Layout dos items e menu
+*/
+table{
+    margin: 20px 0;
+}
+table th{
+    padding: 5px 15px;
+}
+table td{
+    text-align: center;
+}
+.menu_box{
+    position: fixed;
+    top:30%;
+    left: 30%;
+    width: auto;
+    height: auto;
+    border: 2px solid #333;
+    background-color: #d3d3d3;
+    box-shadow: 0 0 20px #333;
+}
+.menu_box ul{
+    list-style: none;
+    padding: 0;
+    margin: 40px;
+}
+.menu_box ul li{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.menu_box li a:hover{
+    color: brown;
+    
+}
+.menu_box li a{
+    transition: .4s;
+    text-decoration: none;
+    color: #333;
+}
+#resultadoPositivo{
+    display: none;
+    width: auto;
+    padding: 10px 20px;;
+    font-size:1.1em;
+    color: #333;
+    background-color: #32CD32;
+    border-radius: 15px;
+}
+#resultadoNegativo{
+        display: none;
+    width: auto;
+    padding: 10px 20px;;
+    font-size:1.1em;
+    color: #d3d3d3;
+    background-color:brown;
+    border-radius: 15px;
+}
