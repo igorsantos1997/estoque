@@ -31,9 +31,9 @@
         }
         
         private function alimentaClasse($dados){
-            $this->setCod($dados["cod"]);
-            $this->setCodCliente($dados["codCliente"]);
-            $this->setCodProdutos($dados["codProdutos"]);
+            $this->setCodigo($dados["cod"]);
+            $this->setCodigoCliente($dados["codCliente"]);
+            $this->setCodigoProdutos($dados["codProdutos"]);
             $this->setDataHora($dados["dataHora"]);
             $this->setDescricao($dados["descricao"]);
             $this->setDesconto($dados["desconto"]);
@@ -53,7 +53,7 @@
         }
         public function apagar(){
             $query="DELETE FROM tbtransacao WHERE cod=:cod";
-            $param=array(":cod"=>$this->getCod());
+            $param=array(":cod"=>$this->getCodigo());
             $stmt=$this->sql->query($query,$param);
             if ($stmt->rowCount()>0) return true;
             else return false;
@@ -68,19 +68,22 @@
         }
         public function getByCodigo(){
             $query = "SELECT * FROM tbtransacao WHERE cod=:cod";
-            $param=array(":cod"=>$this->getCod());
+            $param=array(":cod"=>$this->getCodigo());
             $dados=$this->sql->select($query,$param);
             if ($stmt->rowCount()>0){
                 $this->alimentaClasse($dados);
                 return true;
             } 
-            else return false;
+            else{
+                $this->setCodigo("");
+                return false; 
+            }         
         }
         private function returnParams():array{
             return array(
-                "cod"=>$this->getCod(),
-                "codCliente"=>$this->getCodCliente(),
-                "codProdutos"=>$this->getCodProdutos(),
+                "cod"=>$this->getCodigo(),
+                "codCliente"=>$this->getCodigoCliente(),
+                "codProdutos"=>$this->getCodigoProdutos(),
                 "dataHora"=>$this->getDataHora(),
                 "descricao"=>$this->getDescricao(),
                 "desconto"=>$this->getDesconto(),
@@ -89,27 +92,27 @@
                 "meioPagamento"=>$this->getMeioPagamento()
             );
         }
-        public function getCod(){
+        public function getCodigo(){
             return $this->cod;
         }
 
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
 
-        public function getCodCliente(){
+        public function getCodigoCliente(){
             return $this->codCliente;
         }
 
-        public function setCodCliente($codCliente){
+        public function setCodigoCliente($codCliente){
             $this->codCliente = $codCliente;
         }
 
-        public function getCodProdutos(){
+        public function getCodigoProdutos(){
             return $this->codProdutos;
         }
 
-        public function setCodProdutos($codProdutos){
+        public function setCodigoProdutos($codProdutos){
             $this->codProdutos = $codProdutos;
         }
 

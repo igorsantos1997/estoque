@@ -7,8 +7,8 @@
         private $backcod;
         private $sql;
         public function SubCategoria($cod="",$codPai="",$subCategoria=""){
-            $this->setCod($cod);
-            $this->setCodPai($codPai);
+            $this->setCodigo($cod);
+            $this->setCodigoPai($codPai);
             
             $this->setSubCategoria($subCategoria);
             $this->setBackCod($cod);
@@ -31,21 +31,25 @@
         }
         public function apagar(){
             $query="DELETE FROM tbsubcategoria WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $stmt=$this->sql->query($query,$params);
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
         public function getByCodigo(){
             $query="SELECT * FROM tbsubcategoria WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $retorno=$this->sql->select($query,$params);
             if (isset($retorno[0])){
                 $dados=$retorno[0];
                 $this->setSubCategoria($dados["subCategoria"]);
-                $this->setBackCod($this->getCod());
+                $this->setBackCod($this->getCodigo());
                 return true;
-            } else return false;
+            }
+            else{
+                $this->setCodigo("");
+                return false; 
+            } 
         }
         public static function retornaSubCategoria($codigo){
             $query="SELECT subcategoria FROM tbsubcategoria WHERE cod=:CODIGO";
@@ -58,16 +62,16 @@
                
             }
         }
-        public function getCod(){
+        public function getCodigo(){
 		  return $this->cod;
 	   }
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
-        public function getCodPai(){
+        public function getCodigoPai(){
 		  return $this->codPai;
 	   }
-        public function setCodPai($cod){
+        public function setCodigoPai($cod){
             $this->codPai = $cod;
         }
         public function getSubCategoria(){
@@ -87,8 +91,8 @@
         }
         private function returnParams($retornarBackCod=false):array{
             return array(
-                ":CODIGO"=>$this->getCod(),
-                ":CODPAI"=>$this->getCodPai(),
+                ":CODIGO"=>$this->getCodigo(),
+                ":CODPAI"=>$this->getCodigoPai(),
                 ":SUBCATEGORIA"=>$this->getSubCategoria()
             );
         }

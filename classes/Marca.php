@@ -5,7 +5,7 @@
         private $backcod;
         private $sql;
         public function Marca($cod="",$marca=""){
-            $this->setCod($cod);
+            $this->setCodigo($cod);
             $this->setMarca($marca);
             $this->setBackCod($cod);
             $this->sql=new Sql();
@@ -28,14 +28,14 @@
         }
         public function apagar(){
             $query="DELETE FROM tbmarca WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $stmt=$this->sql->query($query,$params);
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
         public function getByCodigo(){
             $query="SELECT * FROM tbmarca WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $retorno=$this->sql->select($query,$params);
             if (isset($retorno[0])){
                 $dados=$retorno[0];
@@ -60,10 +60,10 @@
                
             }
         }
-        public function getCod(){
+        public function getCodigo(){
 		  return $this->cod;
 	   }
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
 
@@ -83,7 +83,7 @@
         }
         private function returnParams($retornarBackCod=false):array{
             return array(
-                ":CODIGO"=>$this->getCod(),
+                ":CODIGO"=>$this->getCodigo(),
                 ":MARCA"=>$this->getMarca()
             );
         }

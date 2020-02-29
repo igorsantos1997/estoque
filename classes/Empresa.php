@@ -93,9 +93,10 @@ class Empresa extends Sql{
         if (isset($result[0])){
              $this->alimentarClasse($result[0]);
             return true;
-        } else return false;
-       
-        
+        } else{
+                 $this->setCodigo("");
+                 return false; 
+              }   
     }
       private function alimentarClasse($dados){
             $this->setCodigo($dados["cod"]);

@@ -102,11 +102,13 @@
                 if (isset($result[0])){
                     $dados=$result[0];
                     $this->alimentarClasse($dados); 
+                    
                     return true;
                 } 
-                else return false;
-            
-            
+                else{
+                    $this->setCodigo("");
+                    return false; 
+                } 
         }
         private function alimentarClasse($dados){
             $this->setCodigo($dados["cod"]);

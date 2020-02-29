@@ -105,7 +105,11 @@ require_once "SubCategoria.php";
             if (isset($result[0])){
                 $this->alimentaClasse($result[0]);
                 return true;
-            } else return false;
+            }
+            else{
+                $this->setCodigo("");
+                return false; 
+            } 
         }
         private function alimentaClasse($dados){
             $this->setCodigo($dados["cod"]);

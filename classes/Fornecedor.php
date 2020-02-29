@@ -91,7 +91,11 @@ class Fornecedor extends Sql{
         if (isset($result[0])){
              $this->alimentarClasse($result[0]);
             return true;
-        } else return false;
+        }
+        else{
+            $this->setCodigo("");
+            return false; 
+        } 
        
         
     }

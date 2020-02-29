@@ -5,7 +5,7 @@
         private $backcod;
         private $sql;
         public function Categoria($cod="",$Categoria=""){
-            $this->setCod($cod);
+            $this->setCodigo($cod);
             $this->setCategoria($Categoria);
             $this->setBackCod($cod);
             $this->sql=new Sql();
@@ -28,22 +28,26 @@
         }
         public function apagar(){
             $query="DELETE FROM tbcategoria WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $stmt=$this->sql->query($query,$params);
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
         public function getByCodigo(){
             $query="SELECT * FROM tbcategoria WHERE cod=:CODIGO";
-            $params=array(":CODIGO"=>$this->getCod());
+            $params=array(":CODIGO"=>$this->getCodigo());
             $retorno=$this->sql->select($query,$params);
  
             if (isset($retorno[0])){
                 $dados=$retorno[0];
                 $this->setCategoria($dados["categoria"]);
-                $this->setBackCod($this->getCod());
+                $this->setBackCod($this->getCodigo());
                 return true;
-            } else return false;
+            }
+            else{
+                $this->setCodigo("");
+                return false; 
+            } 
             
         }
         public static function retornaCategoria($codigo){
@@ -57,10 +61,10 @@
                
             }
         }
-        public function getCod(){
+        public function getCodigo(){
 		  return $this->cod;
 	   }
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
 
@@ -82,7 +86,7 @@
         }
         private function returnParams($retornarBackCod=false):array{
             return array(
-                ":CODIGO"=>$this->getCod(),
+                ":CODIGO"=>$this->getCodigo(),
                 ":CATEGORIA"=>$this->getCategoria()
             );
         }
