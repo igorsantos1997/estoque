@@ -46,6 +46,7 @@
         $obs=$_POST["txtObs"];
 
         $cliente = new Cliente($codigo,$nome,$nascimento,$sexo,$telefone,$celular,$rg,$cpf,$endereco,$email,$obs);
+
         if($cliente->getByCodigo()){
             ?><script>resultadoNegativo("Código já existente! Favor alterar código.");</script><?php
             preencherCampos();

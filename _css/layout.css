@@ -104,6 +104,15 @@ input[type="checkbox"]{
     width: 90%;
     height: 40px;
     margin: 10px auto;
+
+}
+
+#btnBuscar{
+    width: 200px;
+    height: 40px;
+    margin: 10px auto;
+}
+button{
     background-color: azure;
     border-radius: 10px;
     font-size: 1.2em;
@@ -111,9 +120,9 @@ input[type="checkbox"]{
     outline: none;
     transition: .4s;
 }
-#btnCadastrar:hover{
+button:hover{
     background-color: cadetblue;
-    color: #d3d3d3;
+    color: #d3d3d3; 
 }
 .separator{
     font-size: 1.25em;

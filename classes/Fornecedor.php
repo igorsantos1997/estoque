@@ -16,7 +16,7 @@ class Fornecedor extends Sql{
     private $sql;
     
     public function Fornecedor($cod="", $nomeFantasia="", $razaoSocial="",$cnpj="",$ie="",$isentoie="",$conticms="",$telefone="",$celular="",$endereco="",$email="",$obs=""){
-        $this->setCod($cod);
+        $this->setCodigo($cod);
         $this->setNomeFantasia($nomeFantasia);
         $this->setRazaoSocial($razaoSocial);
         $this->setCnpj($cnpj);
@@ -31,15 +31,27 @@ class Fornecedor extends Sql{
         $this->setBackCod($cod);
         $this->sql=new Sql();
     }
-    public static function buscar($valor){
-            $query="SELECT * FROM tbfornecedor WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
-            $valor="%".$valor."%";
-            $param=array(":NOME"=>$valor);
-            if (!isset($sql)) $sql=new Sql();
-            $result=$sql->select($query,$param);
-            
-            return $result;
+     public function __toString(){
+        return $this->returnParams();
+    }
+   public static function buscar($valor,$buscarPor="razaoSocial"){
+        $query="";
+        $valor="%".$valor."%";
+        $param="";
+        if ($buscarPor=="cnpj"){
+            $query="SELECT * FROM tbfornecedor WHERE cnpj LIKE :CNPJ";
+            $param=array(":CNPJ"=>$valor);
         }
+        else{
+            $query="SELECT * FROM tbfornecedor WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
+            $param=array(":NOME"=>$valor);
+        }
+        
+        
+        if (!isset($sql)) $sql=new Sql();
+        $result=$sql->select($query,$param);
+        return $result;
+    }
     public function inserir(){
         $query="INSERT INTO tbfornecedor VALUES (:COD,:NOMEFANTASIA,:RAZAOSOCIAL,:CNPJ,:IE,:ISENTOIE,:CONTICMS,:TELEFONE,:CELULAR,:ENDERECO,:EMAIL,:OBS)";
         $params=$this->returnParams();
@@ -64,7 +76,7 @@ class Fornecedor extends Sql{
     public function apagar(){
         $query="DELETE FROM tbfornecedor WHERE cod=:COD";
         $param=array(
-            ":COD"=>$this->getCod()
+            ":COD"=>$this->getCodigo()
         );
         $stmt=$this->sql->query($query,$param);
         if ($stmt->rowCount()){
@@ -74,7 +86,7 @@ class Fornecedor extends Sql{
     
     public function getByCodigo(){
         $query="SELECT * FROM tbfornecedor WHERE cod=:COD";
-        $param=array(":COD"=>$this->getCod());
+        $param=array(":COD"=>$this->getCodigo());
         $result = $this->sql->select($query,$param);
         if (isset($result[0])){
              $this->alimentarClasse($result[0]);
@@ -84,7 +96,7 @@ class Fornecedor extends Sql{
         
     }
       private function alimentarClasse($dados){
-            $this->setCod($dados["cod"]);
+            $this->setCodigo($dados["cod"]);
             $this->setNomeFantasia($dados["nomeFantasia"]);
             $this->setRazaoSocial($dados["razaoSocial"]);
             $this->setCnpj($dados["cnpj"]);
@@ -103,11 +115,11 @@ class Fornecedor extends Sql{
             $result=$sql->select($query,array());
             return $result;
         }
-    public function getCod(){
+    public function getCodigo(){
             return $this->cod;
         }
 
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
 
@@ -207,7 +219,7 @@ class Fornecedor extends Sql{
         }
     private function returnParams():array{
         return array(
-            ":COD"=>$this->getCod(),
+            ":COD"=>$this->getCodigo(),
             ":NOMEFANTASIA"=>$this->getNomeFantasia(),
             ":RAZAOSOCIAL"=>$this->getRazaoSocial(),
             ":CNPJ"=>$this->getCnpj(),

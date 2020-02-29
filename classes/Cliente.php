@@ -32,26 +32,23 @@
             
         }
         public function __toString(){
-            return json_encode(array(
-                "codigo"=>$this->getCodigo(),
-                "nome"=>$this->getNome(),
-                "dtNascimento"=>$this->getDtNascimento(),
-                "sexo"=>$this->getSexo(),
-                "telefone"=>$this->getTelefone(),
-                "celular"=>$this->getCelular(),
-                "rg"=>$this->getRg(),
-                "cpf"=>$this->getCpf(),
-                "endereco"=>$this->getEndereco(),
-                "email"=>$this->getEmail(),
-                "obs"=>$this->getObs(),
-                "limiteDebito"=>$this->getLimiteDebito()
-                
-            ));
+            return $this->returnParams();
         }
-        public static function buscar($valor){
-            $query="SELECT * FROM tbcliente WHERE nome LIKE :NOME";
+        public static function buscar($valor,$buscarPor="nome"){
+            $query="";
+            $param="";
             $valor="%".$valor."%";
-            $param=array(":NOME"=>$valor);
+            if ($buscarPor=="nome"){
+                $query="SELECT * FROM tbcliente WHERE nome LIKE :NOME";
+                $param=array(":NOME"=>$valor);
+            } 
+            elseif ($buscarPor=="cpf"){
+                $query="SELECT * FROM tbcliente WHERE cpf LIKE :CPF";
+                $param=array(":CPF"=>$valor);
+            } 
+            
+            
+            
             if (!isset($sql)) $sql=new Sql();
             $result=$sql->select($query,$param);
             

@@ -24,7 +24,7 @@ require_once "SubCategoria.php";
         private $sql;
         
         public function Produto($cod="",$descricao="",$pesoLiquido="",$pesoBruto="",$categoria="",$subCategoria="",$marca="",$precoDeVenda="",$precoDeCusto="",$estoque="",$limiteDeEstoque="",$obs="",$fornecedor="",$ncm="",$cest="",$codBeneficio="",$tributacao=""){
-            $this->setCod($cod);
+            $this->setCodigo($cod);
             $this->setDescricao($descricao);
             $this->setPesoLiquido($pesoLiquido);
             $this->setPesoBruto($pesoBruto);
@@ -39,13 +39,29 @@ require_once "SubCategoria.php";
             $this->setFornecedor($fornecedor);
             $this->setNcm($ncm);
             $this->setCest($cest);
-            $this->setCodBeneficio($codBeneficio);
+            $this->setCodigoBeneficio($codBeneficio);
             $this->setTributacao($tributacao);
             $this->setBackupCod($cod);
             $this->sql=new Sql();
         }
         public function __toString(){
-            return json_encode($this->returnParams());
+            return $this->returnParams();
+        }
+         public static function buscar($valor,$buscarPor="descricao"){
+            $query="";
+            $param="";
+            $valor="%".$valor."%";
+            if ($buscarPor=="descricao"){
+                $query="SELECT * FROM tbproduto WHERE descricao LIKE :DESCRICAO";
+                $param=array(":DESCRICAO"=>$valor);
+            } 
+           
+            
+            
+            if (!isset($sql)) $sql=new Sql();
+            $result=$sql->select($query,$param);
+            
+            return $result;
         }
         public function listar(){
             $query="SELECT * FROM tbproduto";
@@ -77,14 +93,14 @@ require_once "SubCategoria.php";
         }
         public function apagar(){
             $query="DELETE FROM tbproduto WHERE cod=:CODIGO";
-            $param=array("CODIGO"=>$this->getCod());
+            $param=array("CODIGO"=>$this->getCodigo());
             $stmt=$this->sql->query($query,$param);
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
         public function getByCodigo(){
             $query="SELECT * FROM tbproduto WHERE cod=:CODIGO";
-            $param=array(":CODIGO"=>$this->getCod());
+            $param=array(":CODIGO"=>$this->getCodigo());
             $result=$this->sql->select($query,$param);
             if (isset($result[0])){
                 $this->alimentaClasse($result[0]);
@@ -92,7 +108,7 @@ require_once "SubCategoria.php";
             } else return false;
         }
         private function alimentaClasse($dados){
-            $this->setCod($dados["cod"]);
+            $this->setCodigo($dados["cod"]);
             $this->setDescricao($dados["descricao"]);
             $this->setPesoLiquido($dados["pesoLiquido"]);
             $this->setPesoBruto($dados["pesoBruto"]);
@@ -107,16 +123,16 @@ require_once "SubCategoria.php";
             $this->setFornecedor($dados["fornecedor"]);
             $this->setNcm($dados["ncm"]);
             $this->setCest($dados["cest"]);
-            $this->setCodBeneficio($dados["codBeneficio"]);
+            $this->setCodigoBeneficio($dados["codBeneficio"]);
             $this->setTributacao($dados["tributacao"]);
             
             
         }
-        public function getCod(){
+        public function getCodigo(){
 		  return $this->cod;
         }
 
-        public function setCod($cod){
+        public function setCodigo($cod){
             $this->cod = $cod;
         }
 
@@ -232,11 +248,11 @@ require_once "SubCategoria.php";
 		$this->cest = $cest;
 	}
 
-	public function getCodBeneficio(){
+	public function getCodigoBeneficio(){
 		return $this->codBeneficio;
 	}
 
-	public function setCodBeneficio($codBeneficio){
+	public function setCodigoBeneficio($codBeneficio){
 		$this->codBeneficio = $codBeneficio;
 	}
 
@@ -256,7 +272,7 @@ require_once "SubCategoria.php";
         }
         private function returnParams():array{
             return array(
-                ":CODIGO"=>$this->getCod(),
+                ":CODIGO"=>$this->getCodigo(),
                 ":DESCRICAO"=>$this->getDescricao(),
                 ":PESOLIQUIDO"=>$this->getPesoLiquido(),
                 ":PESOBRUTO"=>$this->getPesoBruto(),
@@ -271,7 +287,7 @@ require_once "SubCategoria.php";
                 ":FORNECEDOR"=>$this->getFornecedor(),
                 ":NCM"=>$this->getNcm(),
                 ":CEST"=>$this->getCest(),
-                ":CODBENEFICIO"=>$this->getCodBeneficio(),
+                ":CODBENEFICIO"=>$this->getCodigoBeneficio(),
                 ":TRIBUTACAO"=>$this->getTributacao()
             );
         }
