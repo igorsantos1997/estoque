@@ -33,35 +33,11 @@
     </body>
 </html>
 <?php
-    require_once("../../config.php");
+    require_once("forms.php");
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        $busca=$_POST["txtBusca"];
+        $classe=new Produto();
         $criterio=$_POST["txtCriterio"];
-        $valores="";
-         
-            $cliente=new Produto();
-        if ($criterio=="NomeProduto"){
-            $valores=$cliente->buscar($busca);
-            
-            }
-        elseif ($criterio=="Codigo"){   
-            $cliente->setCodigo($busca);
-            $cliente->getByCodigo();
-            $valores=$cliente->__toString();
-            }
-        
-         if (is_array($valores)) preencheLista($valores);
-        ?><script>$("#txtBusca").val("<?=$busca?>");$("#txtCriterio").val("<?=$criterio?>");</script><?php
-    }
-    function preencheLista($dados){
-         $html="<tr>";
-            foreach ($dados as $indice=>$valor){
-                    if (is_array($valor)) preencheLista($valor);
-                    else $html.="<td>$valor</td>";
-                }
-            $html.="</tr>";
-            ?>
-            <script>$("table").append("<?=$html?>");</script>
-        <?php  
+        $busca=$_POST["txtBusca"];
+        buscaClasse($classe,$criterio,$busca);
     }
 ?>
