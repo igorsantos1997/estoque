@@ -1,6 +1,6 @@
 <html>
-    <link rel="stylesheet" href="../../_css/layout.css">
-            <script src="../../_js/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="../../_css/layout.css">
+        <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <style>
             th:nth-child(2){
@@ -19,11 +19,11 @@
     <body>
         <p class="form_titulo">Consulta Cliente PF</p>
         <form method="post">
-            <label for="txtBusca"></label><input type="text" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
+            <label for="txtBusca"></label><input type="number" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
             <label for="txtCriterio">Buscar por</label><select id="txtCriterio" name="txtCriterio" class="txtBox">
-                <option value="Codigo">Código</option>
-                <option value="Nome">Nome</option>
-                <option value="CPF">CPF</option>
+                <option value="Codigo" class="optNumero">Código</option>
+                <option value="Nome" class="optTexto">Nome</option>
+                <option value="CPF" class="optTexto">CPF</option>
             </select>
             <button id="btnBuscar">Buscar</button>
         </form>

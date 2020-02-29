@@ -23,12 +23,12 @@
     <body>
         <p class="form_titulo">Consulta Fornecedor</p>
         <form method="post">
-            <label for="txtBusca"></label><input type="text" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
+            <label for="txtBusca"></label><input type="number" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
             <label for="txtCriterio">Buscar por</label><select id="txtCriterio" name="txtCriterio" class="txtBox">
-                <option value="Codigo">Código</option>
-                <option value="NomeFantasia">Nome Fantasia</option>
-                <option value="RazaoSocial">Razão Social</option>
-                <option value="CNPJ">CNPJ</option>
+                <option value="Codigo" class="optNumero">Código</option>
+                <option value="NomeFantasia" class="optTexto">Nome Fantasia</option>
+                <option value="RazaoSocial" class="optTexto">Razão Social</option>
+                <option value="CNPJ" class="optTexto">CNPJ</option>
             </select>
             </form>
         <br>
