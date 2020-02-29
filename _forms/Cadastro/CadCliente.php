@@ -1,14 +1,8 @@
-
 <html>
     <head>
-        
         <link rel="stylesheet" href="../../_css/layout.css">
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
-        
-        <script>
-
-        </script>
         <meta charset="utf-8">
     </head>
     <body>

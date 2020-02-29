@@ -1,5 +1,5 @@
 <?php
-class Empresa extends Sql{
+class Fornecedor extends Sql{
     private $cod;
     private $nomeFantasia;
     private $razaoSocial;
@@ -12,11 +12,10 @@ class Empresa extends Sql{
     private $endereco;
     private $email;
     private $obs;
-    private $limiteDebito;
     private $backCod;
     private $sql;
     
-    public function Empresa($cod="", $nomeFantasia="", $razaoSocial="",$cnpj="",$ie="",$isentoie="",$conticms="",$telefone="",$celular="",$endereco="",$email="",$obs="",$limiteDebito=""){
+    public function Fornecedor($cod="", $nomeFantasia="", $razaoSocial="",$cnpj="",$ie="",$isentoie="",$conticms="",$telefone="",$celular="",$endereco="",$email="",$obs=""){
         $this->setCod($cod);
         $this->setNomeFantasia($nomeFantasia);
         $this->setRazaoSocial($razaoSocial);
@@ -29,12 +28,11 @@ class Empresa extends Sql{
         $this->setEndereco($endereco);
         $this->setEmail($email);
         $this->setObs($obs);
-        $this->setLimiteDebito($limiteDebito);
         $this->setBackCod($cod);
         $this->sql=new Sql();
     }
     public static function buscar($valor){
-            $query="SELECT * FROM tbempresa WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
+            $query="SELECT * FROM tbfornecedor WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
             $valor="%".$valor."%";
             $param=array(":NOME"=>$valor);
             if (!isset($sql)) $sql=new Sql();
@@ -43,7 +41,7 @@ class Empresa extends Sql{
             return $result;
         }
     public function inserir(){
-        $query="INSERT INTO tbempresa VALUES (:COD,:NOMEFANTASIA,:RAZAOSOCIAL,:CNPJ,:IE,:ISENTOIE,:CONTICMS,:TELEFONE,:CELULAR,:ENDERECO,:EMAIL,:OBS,:LIMITEDEBITO)";
+        $query="INSERT INTO tbfornecedor VALUES (:COD,:NOMEFANTASIA,:RAZAOSOCIAL,:CNPJ,:IE,:ISENTOIE,:CONTICMS,:TELEFONE,:CELULAR,:ENDERECO,:EMAIL,:OBS)";
         $params=$this->returnParams();
         $stmt=$this->sql->query($query,$params);
         
@@ -54,7 +52,7 @@ class Empresa extends Sql{
     }
     
     public function atualizar(){
-        $query="UPDATE tbempresa SET cod=:COD, nomeFantasia=:NOMEFANTASIA,razaoSocial=:RAZAOSOCIAL,cnpj=:CNPJ,ie=:IE,isentoie=:ISENTOIE,conticms=:CONTICMS,telefone=:TELEFONE,celular=:CELULAR,endereco=:ENDERECO,email=:EMAIL,obs=:OBS,limiteDebito=:LIMITEDEBITO WHERE cod=:BACKCOD";
+        $query="UPDATE tbfornecedor SET cod=:COD, nomeFantasia=:NOMEFANTASIA,razaoSocial=:RAZAOSOCIAL,cnpj=:CNPJ,ie=:IE,isentoie=:ISENTOIE,conticms=:CONTICMS,telefone=:TELEFONE,celular=:CELULAR,endereco=:ENDERECO,email=:EMAIL,obs=:OBS WHERE cod=:BACKCOD";
         $params=$this->returnParams();
         $stmt=$this->sql->query($query,$params);
         array_push($params[":BACKCOD"],$this->getBackCod());
@@ -64,7 +62,7 @@ class Empresa extends Sql{
     }
     
     public function apagar(){
-        $query="DELETE FROM tbempresa WHERE cod=:COD";
+        $query="DELETE FROM tbfornecedor WHERE cod=:COD";
         $param=array(
             ":COD"=>$this->getCod()
         );
@@ -75,7 +73,7 @@ class Empresa extends Sql{
     }
     
     public function getByCodigo(){
-        $query="SELECT * FROM tbempresa WHERE cod=:COD";
+        $query="SELECT * FROM tbfornecedor WHERE cod=:COD";
         $param=array(":COD"=>$this->getCod());
         $result = $this->sql->select($query,$param);
         if (isset($result[0])){
@@ -97,11 +95,10 @@ class Empresa extends Sql{
             $this->setConticms($dados["conticms"]);
             $this->setEmail($dados["email"]);
             $this->setObs($dados["obs"]);
-            $this->setLimiteDebito($dados["limiteDebito"]);
             $this->setBackCod($dados["cod"]);
         }
          public function listar(){
-            $query="SELECT * FROM tbempresa";
+            $query="SELECT * FROM tbfornecedor";
             if (!isset($sql)) $sql=new Sql();
             $result=$sql->select($query,array());
             return $result;
@@ -202,13 +199,6 @@ class Empresa extends Sql{
             $this->obs = $obs;
         }
     
-        public function getLimiteDebito(){
-            return $this->limiteDebito;
-        }
-
-        public function setLimiteDebito($limiteDebito){
-            $this->obs = $limiteDebito;
-        }
         public function setBackCod($cod){
             $this->backCod = $cod;
         }
@@ -228,8 +218,7 @@ class Empresa extends Sql{
             ":CELULAR"=>$this->getCelular(),
             ":ENDERECO"=>$this->getEndereco(),
             ":EMAIL"=>$this->getEmail(),
-            ":OBS"=>$this->getObs(),
-            ":LIMITEDEBITO"=>$this->getLimiteDebito()
+            ":OBS"=>$this->getObs()
         );
     }
 }
