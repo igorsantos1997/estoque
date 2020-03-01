@@ -3,16 +3,15 @@
 
     $codigo=$_POST["nome"];
     $campo= $_POST["campo"];
-    $resultado=Produto::buscar(array($campo=>$codigo));
+    $resultado=Cliente::buscar(array($campo=>$codigo));
     if (count($resultado)>0){
         $resultado=$resultado[0];
     } 
     else{
-        $resultado["descricao"]="N/A";
-        $resultado["precoVenda"]="-1";
+        $resultado["nome"]="N/A";
         
     }
-            echo $resultado["descricao"].";".$resultado["precoVenda"].";";
+            echo $resultado['nome'];
     
             
 ?>

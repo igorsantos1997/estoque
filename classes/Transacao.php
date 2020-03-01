@@ -27,7 +27,7 @@
                 "meioPagamento"=>$meioPagamento,
                 "backCodigo"=>$cod
             );
-            $this->alimentarClasse($dados);
+            $this->alimentaClasse($dados);
         }
         
         private function alimentaClasse($dados){
@@ -48,6 +48,7 @@
             $query="INSERT INTO tbtransacao VALUES (:cod,:codCliente,:codProdutos,:dataHora,:descricao,:desconto,:taxaEntrega,:totalFinal,:meioPagamento)";
             $params=$this->returnParams();
             $stmt=$this->sql->query($query,$params);
+            
             if ($stmt->rowCount()>0) return true;
             else return false;
         }

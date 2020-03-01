@@ -188,8 +188,12 @@ table td{
     background-color:brown;
     border-radius: 15px;
 }
-.form_busca_produto{
+.form_busca_produto, .form_busca_cliente{
     display: none;
+}
+
+
+.form_auxiliar{
     position: fixed;
     top:30%;
     left: 30%;
@@ -199,4 +203,11 @@ table td{
     background-color: #d3d3d3;
     box-shadow: 0 0 20px #333;
     overflow-y: scroll;
+}
+.form_auxiliar tr{
+    cursor: pointer;
+    transition: .4s;
+}
+.form_auxiliar tr:hover{
+background-color: azure;
 }
