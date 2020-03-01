@@ -2,7 +2,9 @@
     require_once("../../config.php");
 
     $produto=$_POST["nome"];
-    $resultado=Produto::buscar(array("descricao"=>$produto));
+    $campo="descricao";
+    if (isset($_POST["campo"])) $campo= $_POST["campo"];
+    $resultado=Produto::buscar(array($campo=>$produto));
             echo "<table border=1>";
             echo "<tr>";
             echo "<th>Código</th>";

@@ -5,5 +5,4 @@ $(function(){
         $.post("../forms_auxilio/formAuxiliobuscaProduto.php",{ nome: busca},function(msg){ $("#tableBusca").html(msg); });
    }); 
     
-    
 });

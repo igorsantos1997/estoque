@@ -188,7 +188,8 @@ table td{
     background-color:brown;
     border-radius: 15px;
 }
-.busca_produto{
+.form_busca_produto{
+    display: none;
     position: fixed;
     top:30%;
     left: 30%;
