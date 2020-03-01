@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
     require_once("config.php");
+    
 ?>
 <html>
     <head>
@@ -11,6 +12,7 @@
         <script src="_js/menu.js"></script>
     </head>
     <body>
+
         <div class="menu_box"></div>
         <div class="barra_superior"></div>
         <ul class="menu"><!-- Menu criado via JS e JSON. Os items do menu estão em um arquivo JSON, e o JS interpreta as informações --></ul>
@@ -19,3 +21,9 @@
         </div>
     </body>
 </html>
+<?php
+
+
+
+
+?>

@@ -5,7 +5,7 @@
     <script>
     </script>
     <body>
-        <p class="form_titulo">Entrada de Estoque - Compra</p>
+        <p class="form_titulo">Entrada de Estoque - Ajuste</p>
         <label for="txtProdutos">Produtos</label><select id="txtProdutos" name="txtProdutos" class="txtBox">
             <option value="1">NOTEBOOK</option>
         </select>

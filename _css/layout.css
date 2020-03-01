@@ -188,3 +188,14 @@ table td{
     background-color:brown;
     border-radius: 15px;
 }
+.busca_produto{
+    position: fixed;
+    top:30%;
+    left: 30%;
+    width: auto;
+    height: 300px;
+    border: 2px solid #333;
+    background-color: #d3d3d3;
+    box-shadow: 0 0 20px #333;
+    overflow-y: scroll;
+}

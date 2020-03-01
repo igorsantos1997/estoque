@@ -1,5 +1,5 @@
 <?php
-    class Categoria extends Sql{
+    class Categoria extends consultaSql{
         private $cod;
         private $Categoria;
         private $backcod;

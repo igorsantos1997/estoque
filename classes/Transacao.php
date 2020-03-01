@@ -1,5 +1,5 @@
 <?php
-    class Transacao extends Sql{
+    class Transacao extends consultaSql{
         private $cod;
         private $codCliente;
         private $codProdutos; 

@@ -1,5 +1,5 @@
 <?php
-class Fornecedor extends Sql{
+class Fornecedor extends consultaSql{
     private $cod;
     private $nomeFantasia;
     private $razaoSocial;
@@ -34,23 +34,8 @@ class Fornecedor extends Sql{
      public function __toString(){
         return $this->returnParams();
     }
-   public static function buscar($valor,$buscarPor="razaoSocial"){
-        $query="";
-        $valor="%".$valor."%";
-        $param="";
-        if ($buscarPor=="cnpj"){
-            $query="SELECT * FROM tbfornecedor WHERE cnpj LIKE :CNPJ";
-            $param=array(":CNPJ"=>$valor);
-        }
-        else{
-            $query="SELECT * FROM tbfornecedor WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
-            $param=array(":NOME"=>$valor);
-        }
-        
-        
-        if (!isset($sql)) $sql=new Sql();
-        $result=$sql->select($query,$param);
-        return $result;
+   public static function buscar($buscarPor){
+       return self::buscarSql("tbfornecedor",$buscarPor);
     }
     public function inserir(){
         $query="INSERT INTO tbfornecedor VALUES (:COD,:NOMEFANTASIA,:RAZAOSOCIAL,:CNPJ,:IE,:ISENTOIE,:CONTICMS,:TELEFONE,:CELULAR,:ENDERECO,:EMAIL,:OBS)";

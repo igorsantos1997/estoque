@@ -7,8 +7,8 @@
         <form method="post">
             <label for="txtBusca"></label><input type="number" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
             <label for="txtCriterio">Buscar por</label><select id="txtCriterio" name="txtCriterio" class="txtBox">
-                <option value="Codigo" class="optNumero">Código</option>
-                <option value="NomeProduto" class="optTexto">Nome do Produto</option>
+                <option value="cod" class="optNumero">Código</option>
+                <option value="descricao" class="optTexto">Nome do Produto</option>
             </select>
         </form>
         <br>
@@ -19,11 +19,14 @@
                 <th>Peso Líquido</th>
                 <th>Peso Bruto</th>
                  <th>Categoria</th>
+                <th>Sub Categoria</th>
+                <th>Marca</th>
                  <th>Preço de Venda</th>
                 <th>Preço de Custo</th>
                 <th>Estoque Atual</th>
                <th>Limite Estoque</th>
                  <th>Observações</th>
+                <th>Fornecedor</th>
                 <th>NCM</th>
                 <th>CEST</th>
                 <th>Cód Benefício</th>
@@ -36,8 +39,6 @@
     require_once("forms.php");
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $classe=new Produto();
-        $criterio=$_POST["txtCriterio"];
-        $busca=$_POST["txtBusca"];
-        buscaClasse($classe,$criterio,$busca);
+        buscaClasse($classe);
     }
 ?>

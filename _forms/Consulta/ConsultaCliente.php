@@ -21,7 +21,7 @@
         <form method="post">
             <label for="txtBusca"></label><input type="number" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
             <label for="txtCriterio">Buscar por</label><select id="txtCriterio" name="txtCriterio" class="txtBox">
-                <option value="Codigo" class="optNumero">Código</option>
+                <option value="cod" class="optNumero">Código</option>
                 <option value="Nome" class="optTexto">Nome</option>
                 <option value="CPF" class="optTexto">CPF</option>
             </select>
@@ -51,8 +51,6 @@
     require_once("forms.php");
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $classe=new Cliente();
-        $criterio=$_POST["txtCriterio"];
-        $busca=$_POST["txtBusca"];
-        buscaClasse($classe,$criterio,$busca);
+        buscaClasse($classe);
     }
 ?>

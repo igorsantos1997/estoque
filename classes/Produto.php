@@ -2,7 +2,7 @@
 require_once "Categoria.php";
 require_once "SubCategoria.php";
 
-    class Produto extends Sql{
+    class Produto extends consultaSql{
         private $cod;
         private $descricao;
         private $pesoLiquido;
@@ -47,21 +47,8 @@ require_once "SubCategoria.php";
         public function __toString(){
             return $this->returnParams();
         }
-         public static function buscar($valor,$buscarPor="descricao"){
-            $query="";
-            $param="";
-            $valor="%".$valor."%";
-            if ($buscarPor=="descricao"){
-                $query="SELECT * FROM tbproduto WHERE descricao LIKE :DESCRICAO";
-                $param=array(":DESCRICAO"=>$valor);
-            } 
-           
-            
-            
-            if (!isset($sql)) $sql=new Sql();
-            $result=$sql->select($query,$param);
-            
-            return $result;
+         public static function buscar($buscarPor){
+            return self::buscarSql("tbproduto",$buscarPor);
         }
         public function listar(){
             $query="SELECT * FROM tbproduto";

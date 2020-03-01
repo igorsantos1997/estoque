@@ -1,5 +1,5 @@
 <?php
-class Empresa extends Sql{
+class Empresa extends consultaSql{
     private $cod;
     private $nomeFantasia;
     private $razaoSocial;
@@ -33,23 +33,8 @@ class Empresa extends Sql{
         $this->setBackCod($cod);
         $this->sql=new Sql();
     }
-    public static function buscar($valor,$buscarPor="razaoSocial"){
-        $query="";
-        $valor="%".$valor."%";
-        $param="";
-        if ($buscarPor=="cnpj"){
-            $query="SELECT * FROM tbempresa WHERE cnpj LIKE :CNPJ";
-            $param=array(":CNPJ"=>$valor);
-        }
-        else{
-            $query="SELECT * FROM tbempresa WHERE nomeFantasia LIKE :NOME or razaoSocial LIKE :NOME";
-            $param=array(":NOME"=>$valor);
-        }
-        
-        
-        if (!isset($sql)) $sql=new Sql();
-        $result=$sql->select($query,$param);
-        return $result;
+    public static function buscar($buscarPor){
+        return self::buscarSql("tbempresa",$buscarPor);
     }
     public function __toString(){
         return $this->returnParams();

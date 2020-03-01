@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="../../_css/layout.css">
     <script src="../../_js/jquery-3.4.1.min.js"></script>
     <script src="../../_js/forms.js"></script>
+
     <script>
         $(function(){
             $("select").on("click",function(){
@@ -10,12 +11,15 @@
                 else $("#txtBusca").attr({type: "text"});
             });
             $("tr").on("click",function(){
-                var codigo=$("td",this).html();
+                var codigo=$("td:nth-child(2)",this).html();
                 alert (codigo);
             });
         });
     </script>
     <body>
+        <?php
+            require_once ("../forms_auxilio/formAuxilio.php");
+        ?>
         <p class="form_titulo">Venda</p>
         <label for="txtBusca"></label><input type="number" name="txtBusca" id="txtBusca" placeholder="Busca" class="txtBox">
         <label for="txtCriterio">Buscar por</label><select id="txtCriterio" name="txtCriterio" class="txtBox">
@@ -49,3 +53,9 @@
         </table>
     </body>
 </html>
+<?php
+
+ require_once("../../config.php");
+
+    
+?>

@@ -1,5 +1,5 @@
 <?php
-    class SubCategoria extends Sql{
+    class SubCategoria extends consultaSql{
         private $cod;
         private $codPai;
         

@@ -1,5 +1,5 @@
 <?php
-    class Cliente extends Sql{
+    class Cliente extends consultaSql{
         private $codigo;
         private $nome;
         private $dtNascimento;
@@ -34,25 +34,9 @@
         public function __toString(){
             return $this->returnParams();
         }
-        public static function buscar($valor,$buscarPor="nome"){
-            $query="";
-            $param="";
-            $valor="%".$valor."%";
-            if ($buscarPor=="nome"){
-                $query="SELECT * FROM tbcliente WHERE nome LIKE :NOME";
-                $param=array(":NOME"=>$valor);
-            } 
-            elseif ($buscarPor=="cpf"){
-                $query="SELECT * FROM tbcliente WHERE cpf LIKE :CPF";
-                $param=array(":CPF"=>$valor);
-            } 
-            
-            
-            
-            if (!isset($sql)) $sql=new Sql();
-            $result=$sql->select($query,$param);
-            
-            return $result;
+       
+        public static function buscar($consulta){
+            return self::buscarSql("tbcliente",$consulta);
         }
         public static function listar(){
             $query="SELECT * FROM tbcliente";

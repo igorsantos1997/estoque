@@ -1,5 +1,5 @@
 <?php
-    class Marca extends Sql{
+    class Marca extends consultaSql{
         private $cod;
         private $marca;
         private $backcod;
