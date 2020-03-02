@@ -68,10 +68,22 @@ Inicio: Layout dos items e menu
 label{
     margin-right: 10px;
 }
+.btnLupa{
+    background-image: url('../PNGs/lupa.png');
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+}
+.btnCarrinho{
+    background-image: url('../PNGs/addCarrinho.png');
+    width: 70px;
+    height: 70px;
+    
+}
 .txtBox{
     margin: 6px 5px;
 
-    border-radius: 10px;
+    border-radius: 2px;
     height: 30px;
     border: 1px solid #d3d3d3;
     outline: none;
@@ -97,7 +109,7 @@ input[type="checkbox"]{
     font-size: 1.6em;
     font-style: italic;
     text-align: center;
-    color:cadetblue;
+    color:#333;
 }
 #btnCadastrar{
     display: block;
@@ -107,22 +119,24 @@ input[type="checkbox"]{
 
 }
 
-#btnBuscar{
+#btnBuscar,#btnBuscarCli{
     width: 200px;
     height: 40px;
     margin: 10px auto;
 }
 button{
-    background-color: azure;
-    border-radius: 10px;
+    background-color: #d3d3d3;
+    border-radius: 5px;
     font-size: 1.2em;
-    color : #333;
+    color: #333; 
     outline: none;
     transition: .4s;
+    cursor: pointer;
 }
 button:hover{
-    background-color: cadetblue;
-    color: #d3d3d3; 
+    background-color: rgb(100,100,100);
+    color : #d3d3d3;
+    
 }
 .separator{
     font-size: 1.25em;
@@ -165,6 +179,10 @@ table td{
     color: brown;
     
 }
+.menu_box li:hover{
+    border: 1px solid #333;
+    
+}
 .menu_box li a{
     transition: .4s;
     text-decoration: none;
@@ -195,8 +213,8 @@ table td{
 
 .form_auxiliar{
     position: fixed;
-    top:30%;
-    left: 30%;
+    top:20%;
+    left: 10%;
     width: auto;
     height: 300px;
     border: 2px solid #333;

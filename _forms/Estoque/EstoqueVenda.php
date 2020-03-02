@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="../../_css/layout.css">
     <script src="../../_js/jquery-3.4.1.min.js"></script>
     <script src="../../_js/forms.js"></script>
+    <script src="EstoqueScriptBuscas.js"></script>
     <style>
         #item{
             transition: .4s;
@@ -54,10 +55,7 @@
                 atualizaValorTotal();
             });
         });
-        function buscar(){
-             var busca=$("#txtCodigo").val();
-            $.post("jsonBuscaProduto.php",{ nome: busca,campo: "cod"},function(msg){ preencheCampoProduto(msg) });
-        }
+        
         function calcularDesconto(){
                 var valorTotal=parseFloat($("#valorTotal").html());
                 var desconto=parseInt($("#txtDesconto").val());
@@ -134,12 +132,7 @@
                 $("#txtCliente").val("");
                 $("#txtDesconto").val("0");
         }
-        function preencheCampoProduto(dados){
-            var dados=dados.split(';');
-            $("#txtProduto").val(dados[0]);
-            $("#txtPreco").val(dados[1]);
-            $("#txtQntd").val(1);
-        }
+        
         function finalizaVenda(){
             buscarCli();
             var produtos=[];
@@ -204,7 +197,7 @@
         <p class="form_titulo">Venda</p>
         <div id="result"></div>
         <div id="controls">
-            <label for="txtCodigo">Codigo</label><input type="number" name="txtCodigo" id="txtCodigo" placeholder="Codigo" class="txtBox">
+            <label for="txtCodigo">Codigo</label><input type="number" name="txtCodigo" id="txtCodigo" placeholder="Codigo" class="txtBox"><button id="btnFormAuxiliar" class="btnLupa"></button>
             
             <label for="txtProduto">Produto</label><input type="text" name="txtProduto" id="txtProduto" placeholder="Produto" class="txtBox" disabled>
             <label for="txtPreco">Preço</label><input type="number" name="txtPreco" id="txtPreco" placeholder="Preço" class="txtBox" disabled>
@@ -213,14 +206,14 @@
         
 
         <button id="btnBuscar">Buscar</button>
-        <button id="btnFormAuxiliar">B</button>
-        <button id="btnAddCaixa">Adicionar</button>
+        
+        <button id="btnAddCaixa" class="btnCarrinho" style="float:right"></button>
         <br><br>
         <div id="controlsCli">
-            <label for="txtCodigoCli">Codigo</label><input type="number" name="txtCodigoCli" id="txtCodigoCli" placeholder="Codigo do Cliente" class="txtBox">
+            <label for="txtCodigoCli">Codigo</label><input type="number" name="txtCodigoCli" id="txtCodigoCli" placeholder="Codigo do Cliente" class="txtBox"><button id="btnFormAuxiliarCli" class="btnLupa"></button>
             <label for="txtCliente">Cliente</label><input type="text" name="txtCliente" id="txtCliente" placeholder="Cliente" class="txtBox" disabled>
         </div>
-        <button id="btnBuscarCli">Buscar</button><button id="btnFormAuxiliarCli">B</button>
+        <button id="btnBuscarCli">Buscar</button>
         <br>
         <div style="float:right;font-size: 1.2em;color: red" id="valorTotal">0</div>
         <div style="float:right;font-size: 1.2em;color: red">Total: R$</div>

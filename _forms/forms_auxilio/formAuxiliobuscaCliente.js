@@ -1,3 +1,4 @@
+//Js com intuito de efetuar busca no banco de dados na tabela cliente via Ajax
 $(function(){
    $("#btnBuscarCliente").on("click",function(){
        var busca=$("#txtBuscaCliente").val();

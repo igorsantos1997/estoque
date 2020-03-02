@@ -8,6 +8,7 @@
             buscar();
             $(".form_busca_produto").css({display: "none"});
         });
+        $.post("../forms_auxilio/formAuxiliobuscaProduto.php",{ nome: ""},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
     });
 
 </script>
@@ -28,5 +29,5 @@
         </div>
 <?php
 require_once("../forms_auxilio/funcoesFormAuxilioProduto.php");
-preencheListaBusca(Produto::buscar(array("descricao"=>"")));
+//preencheListaBusca(Produto::buscar(array("descricao"=>"")));
 ?>

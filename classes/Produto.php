@@ -71,10 +71,12 @@ require_once "SubCategoria.php";
         }
         
         public function atualizar(){
-            $query="UPDATE tbprodutos SET cod=:CODIGO,descricao=:DESCRICAO,pesoliquido=:PESOLIQUIDO,pesobruto=:PESOBRUTO,categoria=:CATEGORIA,subCategoria=:SUBCATEGORIA,marca=:MARCA,precoVenda=:PRECODEVENDA,precoCusto=:PRECODECUSTO,estoque=:ESTOQUE,limiteEstoque=:LIMITEDEESTOQUE,obs=:OBS,fornecedor=:FORNECEDOR, ncm=:NCM, cest=:CEST, codBeneficio=:CODBENEFICIO, tributacao=:TRIBUTACAO WHERE cod=:BACKCOD";
+            $query="UPDATE tbproduto SET cod=:CODIGO,descricao=:DESCRICAO,pesoliquido=:PESOLIQUIDO,pesobruto=:PESOBRUTO,categoria=:CATEGORIA,subCategoria=:SUBCATEGORIA,marca=:MARCA,precoVenda=:PRECODEVENDA,precoCusto=:PRECODECUSTO,estoque=:ESTOQUE,limiteEstoque=:LIMITEDEESTOQUE,obs=:OBS,fornecedor=:FORNECEDOR, ncm=:NCM, cest=:CEST, codBeneficio=:CODBENEFICIO, tributacao=:TRIBUTACAO WHERE cod=:BACKCOD";
             $params=$this->returnParams();
-            array_push($params[":BACKCOD"],$this->getBackCod());
+            $params[":BACKCOD"]=$this->getBackupCod();
+            
             $stmt=$this->sql->query($query,$params);
+            
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
@@ -259,7 +261,7 @@ require_once "SubCategoria.php";
         }
 
         public function setBackupCod($cod){
-            $this->cod = $cod;
+            $this->backupCod = $cod;
         }
         private function returnParams():array{
             return array(
