@@ -1,5 +1,5 @@
-     <script src="../forms_auxilio/formAuxiliobuscaProduto.js"></script>
-    <script src="../../_js/jquery-3.4.1.min.js"></script>
+<script src="../forms_auxilio/formAuxiliobusca.js"></script>
+<script src="../../_js/jquery-3.4.1.min.js"></script>
 <script>
     $(function(){
         $("#tableBusca").on("click","tr",function(){
@@ -8,14 +8,14 @@
             buscar();
             $(".form_busca_produto").css({display: "none"});
         });
-        $.post("../forms_auxilio/formAuxiliobuscaProduto.php",{ nome: ""},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
+        $.post("../forms_auxilio/JsonformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
     });
 
 </script>
     <div class="form_busca_produto form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_produto').css({display : 'none'});">X</span>
-            <input type="text" id="txtBuscaProduto" class="txtBox" placeholder="Buscar"><br>
-            <button id="btnBuscarProduto">Buscar</button>
+            <input type="text" id="txtFormAuxBuscaProduto" class="txtBox" placeholder="Buscar"><br>
+            <button id="btnFormAuxBuscarProduto" name="btnBuscarProduto">Buscar</button>
             <table border="1" id="tableBusca">
             <tr>
                 <th>Código</th>
@@ -28,6 +28,5 @@
             </table>
         </div>
 <?php
-require_once("../forms_auxilio/funcoesFormAuxilioProduto.php");
-//preencheListaBusca(Produto::buscar(array("descricao"=>"")));
+
 ?>
