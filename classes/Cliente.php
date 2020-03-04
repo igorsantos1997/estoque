@@ -59,7 +59,7 @@
         public function atualizar(){
             $query="UPDATE tbcliente SET cod=:CODIGO,nome=:NOME,dtNascimento=:DTNASCIMENTO,sexo=:SEXO,telefone=:TELEFONE,celular=:CELULAR,rg=:RG,cpf=:CPF,endereco=:ENDERECO,email=:EMAIL,obs=:OBS,limiteDebito=:LIMITEDEBITO WHERE cod=:BACKCOD";
             $params=$this->returnParams();
-            array_push($params[":BACKCOD"],$this->getBackCod());
+            $params[":BACKCOD"]=$this->getBackCodigo();
             $stmt=$this->sql->query($query,$params);
             
             if ($stmt->rowCount()>0){
@@ -79,13 +79,13 @@
                 return false;
             }
         }
-        public function getByCodigo(){
+        public function getByCodigo($apenasChecar=false){
                 $query="SELECT * FROM tbcliente WHERE cod=(:CODIGO)";
                 $param=array(":CODIGO"=>$this->getCodigo());
                 $result=$this->sql->select($query,$param);
                 if (isset($result[0])){
                     $dados=$result[0];
-                    $this->alimentarClasse($dados); 
+                    if (!$apenasChecar) $this->alimentarClasse($dados); 
                     
                     return true;
                 } 

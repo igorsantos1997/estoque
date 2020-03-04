@@ -31,6 +31,7 @@
                 <option value="razaoSocial" class="optTexto">Razão Social</option>
                 <option value="cnpj" class="optTexto">CNPJ</option>
             </select>
+            <button id="btnBuscar">Buscar</button>
         </form>
         <br>
         <table border="1">

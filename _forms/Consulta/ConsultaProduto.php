@@ -10,6 +10,7 @@
                 <option value="cod" class="optNumero">Código</option>
                 <option value="descricao" class="optTexto">Nome do Produto</option>
             </select>
+            <button id="btnBuscar">Buscar</button>
         </form>
         <br>
         <table border="1">

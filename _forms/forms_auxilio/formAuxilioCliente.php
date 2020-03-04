@@ -4,11 +4,13 @@
     $(function(){
         $("#tableBuscaCli").on("click","tr",function(){
             var codigo=$("td",this).html();
-            $("#txtCodigoCli").val(codigo);
-            buscarCli();
-            $(".form_busca_cliente").css({display: "none"});
+            if (typeof codigo!="undefined"){
+                $("#txtCodigoCli").val(codigo);
+                buscarCli();
+                $(".form_busca_cliente").css({display: "none"});
+            }
         });
-        $.post("../forms_auxilio/JsonformAuxiliobusca.php",{ nome: "", form: "cliente"},function(msg){ $("#tableBuscaCli").html(msg); }); //Preencher tabela.
+        $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "", form: "cliente"},function(msg){ $("#tableBuscaCli").html(msg); }); //Preencher tabela.
    
     });
 </script>

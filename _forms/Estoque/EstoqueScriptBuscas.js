@@ -1,6 +1,6 @@
 function buscar(){
              var busca=$("#txtCodigo").val();
-            $.post("jsonBuscaProduto.php",{ nome: busca,campo: "cod"},function(msg){ preencheCampoProduto(msg) });
+            $.post("ajaxBuscaProduto.php",{ nome: busca,campo: "cod"},function(msg){ preencheCampoProduto(msg) });
         }
 function preencheCampoProduto(dados){
             var dados=dados.split(';');

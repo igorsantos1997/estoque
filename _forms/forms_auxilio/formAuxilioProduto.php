@@ -4,11 +4,13 @@
     $(function(){
         $("#tableBusca").on("click","tr",function(){
             var codigo=$("td",this).html();
-            $("#txtCodigo").val(codigo);
-            buscar();
-            $(".form_busca_produto").css({display: "none"});
+            if (typeof codigo!="undefined"){
+                $("#txtCodigo").val(codigo);
+                buscar();
+                $(".form_busca_produto").css({display: "none"});
+            }
         });
-        $.post("../forms_auxilio/JsonformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
+        $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
     });
 
 </script>

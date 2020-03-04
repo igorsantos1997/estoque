@@ -12,6 +12,7 @@
             background-color: brown;
             color: white;
         }
+
     </style>
             
     <script>
@@ -71,32 +72,58 @@
         }
         function buscarCli(){
              var busca=$("#txtCodigoCli").val();
-            $.post("jsonBuscaCliente.php",{ nome: busca,campo: "cod"},function(msg){ $("#txtCliente").val(msg); });
+            $.post("ajaxBuscaCliente.php",{ nome: busca,campo: "cod"},function(msg){ $("#txtCliente").val(msg); });
         }
         
         
-            function addCaixa(){
+            function addCaixa(){ //Adiciona item na tabela
                 var codigo=$("#txtCodigo").val();
                 var produto=$("#txtProduto").val();
                 var preco=$("#txtPreco").val();
                 var qntd=$("#txtQntd").val();
+                //qntd=parseFloat(qntd)+parseFloat(verificaProdutoNaTabela(codigo));
+                var retorno=verificaProdutoNaTabela(codigo);
+                var valor=parseInt(retorno[0]);
+                qntd=parseInt(qntd)+valor;
                 
-                if (produto!="" && produto!="N/A"){
-                    var precoFinal=parseFloat($("#txtPreco").val())*parseFloat(qntd);
-                    var html="<tr id='item'>";
-                    var html=html+"<td>"+codigo+"</td>";
-                    var html=html+"<td>"+produto+"</td>";
-                    var html=html+"<td>"+qntd+"</td>";
-                    var html=html+"<td>"+preco+"</td>";
-                    var html=html+"<td>"+precoFinal+"</td>";
+                $.post("ajaxVerificarEstoque.php",{codigo: codigo},function(result){ //Ajax para verificar qntd de item em estoque
+                    if (qntd>parseInt(result)) alert("Quantidade maior que estoque!");
+                    else {
+                        if (valor>0){
+                            removeCaixa(retorno[1]);
+                        }
+                        if (produto!="" && produto!="N/A"){
+                            var precoFinal=parseFloat($("#txtPreco").val())*parseFloat(qntd);
+                            var html="<tr id='item'>";
+                            var html=html+"<td>"+codigo+"</td>";
+                            var html=html+"<td>"+produto+"</td>";
+                            var html=html+"<td>"+qntd+"</td>";
+                            var html=html+"<td>"+preco+"</td>";
+                            var html=html+"<td>"+precoFinal+"</td>";
 
-                    $("#tableProdutosCaixa").append(html);
-                    atualizaValorTotal();
-                    limpaCamposProdutos();
-                   
-                }
+                            $("#tableProdutosCaixa").append(html);
+                            atualizaValorTotal();
+                            limpaCamposProdutos();
+
+                        }
+                    }
+                });
+
             }
         
+        function verificaProdutoNaTabela(codigo){ //retorna 0 caso não achar o produto, caso contrario retorna a qntd do produto na tabela e o item para posteriormente ser retirado da tabela e inserido novamente com a qntd corrigida.
+            var valor=0;
+            var retorno=[];
+            retorno[0]=0;
+            $("tr","#tableProdutosCaixa").each(function(){ 
+                var produto=$("td:nth-child(1)",this).html();
+                if (typeof produto!="undefined" && produto==codigo){
+                    retorno[0]=parseInt($("td:nth-child(3)",this).html());
+                    retorno[1]=$(this);
+                } 
+            });
+            return retorno;
+        }
         
         function removeCaixa(item){
             var cod=$("td",item).html();
@@ -104,6 +131,7 @@
             if (cod) $(item).remove();
             atualizaValorTotal();
         }
+        
         function atualizaValorTotal(){
             var valor=0;
             $("tr","#tableProdutosCaixa").each(function(){
@@ -183,7 +211,7 @@
                             codigo=codigo+valor[0]+":"+qntd+";";
                             
                           });
-                    $.post("jsonSaidaEstoque.php",{codigo:codigo,descricao:"Vendido para CLIENTE",cliente:codCli,desconto: desconto,valorTotal: valorTotal},function(msg){ $("#result").html(msg);});
+                    $.post("ajaxSaidaEstoque.php",{codigo:codigo,descricao:"Vendido para CLIENTE",cliente:codCli,desconto: desconto,valorTotal: valorTotal},function(msg){ $("#result").html(msg);});
                      limpaCampos();
                 }
             }

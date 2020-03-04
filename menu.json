@@ -1,6 +1,6 @@
 {
     "Home":"#",
-    "Cadastrar":[{
+    "Cadastrar/Editar":[{
         "Cliente":"box_cadastroCliente",
         "Produtos":"Cadastro_CadProduto",
         "Fornecedor":"Cadastro_CadFornecedor"

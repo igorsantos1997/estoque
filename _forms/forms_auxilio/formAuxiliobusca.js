@@ -8,21 +8,21 @@ $(function(){
 function formAuxBusca(event){ 
     var nome=event.data.nome;
     var tabela="";
-    var caminhoJson="";
+    var caminhoajax="";
     var busca="";
     var form="";
     if (nome=="btnBuscarCliente"){
        busca=$("#txtFormAuxBuscaCliente").val();
        tabela="#tableBuscaCli";
-       caminhoJson="../forms_auxilio/JsonformAuxiliobusca.php";
+       caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
         form="cliente";
     } 
     else if (nome=="btnBuscarProduto"){
        busca=$("#txtFormAuxBuscaProduto").val();
        tabela="#tableBusca";
-       caminhoJson="../forms_auxilio/JsonformAuxiliobusca.php";
+       caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
         form="produto";
     } 
     $(tabela).html("");
-    $.post(caminhoJson,{ nome: busca, form: form},function(msg){ $(tabela).html(msg); });
+    $.post(caminhoajax,{ nome: busca, form: form},function(msg){ $(tabela).html(msg); });
 }
