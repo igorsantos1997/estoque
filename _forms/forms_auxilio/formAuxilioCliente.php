@@ -7,12 +7,19 @@
             if (typeof codigo!="undefined"){
                 $("#txtCodigoCli").val(codigo);
                 buscarCli();
+                resetFormCliente();
                 $(".form_busca_cliente").css({display: "none"});
+                
             }
         });
-        $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "", form: "cliente"},function(msg){ $("#tableBuscaCli").html(msg); }); //Preencher tabela.
+        resetFormCliente();
+        //Preencher tabela.
    
     });
+    function resetFormCliente(){
+        $("#txtFormAuxBuscaCliente").val("");
+        $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "", form: "cliente"},function(msg){ $("#tableBuscaCli").html(msg); }); 
+    }
 </script>
     <div class="form_busca_cliente form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_cliente').css({display : 'none'});">X</span>

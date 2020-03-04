@@ -7,12 +7,19 @@
             if (typeof codigo!="undefined"){
                 $("#txtCodigo").val(codigo);
                 buscar();
+                resetFormProduto();
                 $(".form_busca_produto").css({display: "none"});
+                
             }
         });
-        $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher tabela.
+        resetFormProduto();
     });
-
+    
+function resetFormProduto(){
+    
+    $("#txtFormAuxBuscaProduto").val("");
+    $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher 
+}
 </script>
     <div class="form_busca_produto form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_produto').css({display : 'none'});">X</span>
