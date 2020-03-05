@@ -22,14 +22,55 @@
                         echo "<td>".$valor["cpf"]."</td>";
                         echo "</tr>";
                     }
-                $resultado=Empresa::buscar(array($campo=>$cliente));
+                 echo "</table>";
+    }
+
+    elseif ($form=="clientePj"){
+        $cliente=$_POST["nome"];
+        $campo="razaoSocial";
+        if (isset($_POST["campo"])) $campo= $_POST["campo"];
+        $resultado=Empresa::buscar(array($campo=>$cliente)); //Cliente Pessoa Jurídica 
+                echo "<table border=1>";
+                echo "<tr>";
+                echo "<th>Código</th>";
+                echo "<th>Razão Social</th>";
+                echo "<th>Nome Fantasia</th>";
+                echo "<th>Cnpj</th>";
+                echo "</tr>";
                 foreach ($resultado as $valor){
 
                         echo "<tr>";
                         //if (is_array($valor)) preencheLista($valor);
                         echo "<td>".$valor["cod"]."</td>";
-                        echo "<td>".$valor["nome"]."</td>";
-                        echo "<td>".$valor["cpf"]."</td>";
+                        echo "<td>".$valor["razaoSocial"]."</td>";
+                        echo "<td>".$valor["nomeFantasia"]."</td>";
+                        echo "<td>".$valor["cnpj"]."</td>";
+                    
+                        echo "</tr>";
+                    }
+                 echo "</table>";
+    }
+    elseif ($form=="fornecedor"){
+        $fornecedor=$_POST["fornecedor"];
+        $campo="razaoSocial";
+        if (isset($_POST["campo"])) $campo= $_POST["campo"];
+        $resultado=Fornecedor::buscar(array($campo=>$fornecedor)); //Fornecedor
+                echo "<table border=1>";
+                echo "<tr>";
+                echo "<th>Código</th>";
+                echo "<th>Razão Social</th>";
+                echo "<th>Nome Fantasia</th>";
+                echo "<th>Cnpj</th>";
+                echo "</tr>";
+                foreach ($resultado as $valor){
+
+                        echo "<tr>";
+                        //if (is_array($valor)) preencheLista($valor);
+                        echo "<td>".$valor["cod"]."</td>";
+                        echo "<td>".$valor["razaoSocial"]."</td>";
+                        echo "<td>".$valor["nomeFantasia"]."</td>";
+                        echo "<td>".$valor["cnpj"]."</td>";
+                    
                         echo "</tr>";
                     }
                  echo "</table>";

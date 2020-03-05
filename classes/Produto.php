@@ -76,7 +76,7 @@ require_once "SubCategoria.php";
             $params[":BACKCOD"]=$this->getBackupCod();
             
             $stmt=$this->sql->query($query,$params);
-            
+           
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
@@ -87,12 +87,12 @@ require_once "SubCategoria.php";
             if ($stmt->rowCount()>0) return true;
             else return false;
         }
-        public function getByCodigo(){
+        public function getByCodigo($apenasChecar=false){
             $query="SELECT * FROM tbproduto WHERE cod=:CODIGO";
             $param=array(":CODIGO"=>$this->getCodigo());
             $result=$this->sql->select($query,$param);
             if (isset($result[0])){
-                $this->alimentaClasse($result[0]);
+                if (!$apenasChecar) $this->alimentaClasse($result[0]);
                 return true;
             }
             else{

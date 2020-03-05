@@ -4,12 +4,65 @@
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <meta charset="utf-8">
+               <script>
+            $(function(){
+                $("#btnFormAuxProduto").on("click",function(){
+                
+                $(".form_busca_produto").css({display: "block"});                     
+                });
+            });
+            function buscar(){
+                var codigo=$("#txtCodigo").val();
+                var campo="cod";
+                $.post("ajax/ajaxBuscaProduto.php",{codigo: codigo, campo: campo},function(result){
+                   
+                    var resultado=result.split(';');
+                    var descricao=resultado[0];
+                    var pesoLiquido=resultado[1];
+                    var pesoBruto=resultado[2];
+                    var categoria=resultado[3];
+                    var subcategoria=resultado[4];
+                    var marca=resultado[5];
+                    var precoVenda=resultado[6];
+                    var precoCusto=resultado[7];
+                    var estoque=resultado[8];
+                    var limiteEstoque=resultado[9];
+                    var obs=resultado[10];
+                    var fornecedor=resultado[11];
+                    var ncm=resultado[12];
+                    var cest=resultado[13];
+                    var codBeneficio=resultado[14];
+                    var tributacao=resultado[15];
+                    
+                    $("#txtDescricao").val(descricao);
+                    $("#txtPesoLiquido").val(pesoLiquido);
+                    $("#txtPesoBruto").val(pesoBruto);
+                    $("#txtCategoria").val(categoria);
+                    $("#txtSubCategoria").val(subcategoria);
+                    $("#txtMarca").val(marca);
+                    $("#txtPrecoVenda").val(precoVenda);
+                    $("#txtPrecoCusto").val(precoCusto);
+                    $("#txtEstoqueAtual").val(estoque);
+                    $("#txtLimiteEstoque").val(limiteEstoque);
+                    $("#txtObs").val(obs);
+                    $("#txtFornecedor").val(fornecedor);
+                    $("#txtNcm").val(ncm);
+                    $("#txtCest").val(cest);
+                    $("#txtCodBeneficio").val(codBeneficio);
+                    $("#txtTributacao").val(tributacao);
+                });
+                $("#txtEditar").prop("value","s");
+                $("#btnCadastrar").html("Editar");
+                
+            }
+        </script>
     </head>
         <div id="resultadoPositivo"></div>
         <div id="resultadoNegativo"></div>
+     <?php require_once ("..".DIRECTORY_SEPARATOR."forms_auxilio".DIRECTORY_SEPARATOR."formAuxilioProduto.php")?>
         <p class="form_titulo">Cadastro de Produto</p>
         <form method="post">
-            <label for="txtCodigo">Código</label><input type="number" placeholder="Código" name="txtCodigo" id="txtCodigo" class="txtBox">(Código gerado automaticamente caso campo estaja vazio!)<br>
+            <label for="txtCodigo">Código</label><input type="number" placeholder="Código" name="txtCodigo" id="txtCodigo" class="txtBox"><button id="btnFormAuxProduto" class="btnLupa" type="button"></button>(Código gerado automaticamente caso campo estaja vazio!)<br>
             <label for="txtDescricao">Descrição</label><input type="text" placeholder="Descrição" name="txtDescricao" id="txtDescricao" class="txtBox"><br>
             <label for="txtPesoLiquido">Peso Líquido</label><input type="number" placeholder="Peso Líquido" name="txtPesoLiquido" id="txtPesoLiquido" class="txtBox"><br>
             <label for="txtPesoBruto">Peso Bruto</label><input type="number" placeholder="Peso Bruto" name="txtPesoBruto" id="txtPesoBruto" class="txtBox"><br>
@@ -30,6 +83,8 @@
             <label for="txtCest">CEST</label><input type="number" placeholder="CEST" name="txtCest" id="txtCest" class="txtBox"><br>
             <label for="txtCodBeneficio">Código Benefício</label><input type="number" placeholder="Código Benefício" name="txtCodBeneficio" id="txtCodBeneficio" class="txtBox"><br>
             <label for="txtTributacao">Tributação</label><input type="text" placeholder="Tributação" name="txtTributacao" id="txtTributacao" class="txtBox"><br>
+                           
+            <input type="hidden" name="txtEditar" id="txtEditar" value="n">
             <button id="btnCadastrar">Cadastrar</button>
         </form>
     
@@ -55,20 +110,33 @@
         $cest=$_POST["txtCest"];
         $codBeneficio=$_POST["txtCodBeneficio"];
         $tributacao=$_POST["txtTributacao"];
-        
+        $editar=$_POST["txtEditar"];
         $produto = new Produto($codigo,$descricao,$pesoLiquido,$pesoBruto,$categoria,$subCategoria,$marca,$precoVenda,$precoCusto,$estoqueAtual,$limiteEstoque,$obs,$fornecedor, $ncm,$cest,$codBeneficio,$tributacao);
-        if ($produto->getByCodigo()){
+        if($produto->getByCodigo(true) and $editar=="n"){
             ?><script>resultadoNegativo("Código já existente! Favor alterar código.");</script><?php
+            preencherCampos();
+        } elseif(empty($descricao)) {
+            ?><script>resultadoNegativo("Campo Produto não pode ficar vazio.");</script><?php
             preencherCampos();
         }
         else {
-            if (!$produto->inserir()){
-                ?><script>resultadoNegativo("Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
-                 
-                preencherCampos();
-            } else {
-                ?><script>resultadoPositivo("Cadastrado com Sucesso!");</script><?php
+            if ($editar=="s"){
+                        if (!$produto->atualizar()){
+                            ?><script>resultadoNegativo("Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            preencherCampos();
+                        } else {
+                            ?><script>resultadoPositivo("Atualizado com Sucesso!");</script><?php
+                        } 
             }
+            else{
+                        if (!$produto->inserir()){
+                            ?><script>resultadoNegativo("Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            preencherCampos();
+                        } else {
+                            ?><script>resultadoPositivo("Cadastrado com Sucesso!");</script><?php
+                        } 
+            }
+
         }
     }
 
@@ -101,7 +169,7 @@
             $("#txtSubCategoria").val("<?=$subCategoria?>");
             $("#txtMarca").val("<?=$marca?>");
             $("#txtPrecoVenda").val("<?=$precoVenda?>");
-            $("#txtPrecoCusta").val("<?=$precoCusto?>");
+            $("#txtPrecoCusto").val("<?=$precoCusto?>");
             $("#txtEstoqueAtual").val("<?=$estoqueAtual?>");
             $("#txtLimiteEstoque").val("<?=$limiteEstoque?>");
             $("#txtObs").val("<?=$obs?>");

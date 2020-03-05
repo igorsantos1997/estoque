@@ -51,8 +51,9 @@ class Fornecedor extends consultaSql{
     public function atualizar(){
         $query="UPDATE tbfornecedor SET cod=:COD, nomeFantasia=:NOMEFANTASIA,razaoSocial=:RAZAOSOCIAL,cnpj=:CNPJ,ie=:IE,isentoie=:ISENTOIE,conticms=:CONTICMS,telefone=:TELEFONE,celular=:CELULAR,endereco=:ENDERECO,email=:EMAIL,obs=:OBS WHERE cod=:BACKCOD";
         $params=$this->returnParams();
+        $params[":BACKCOD"]=$this->getBackCod();
         $stmt=$this->sql->query($query,$params);
-        array_push($params[":BACKCOD"],$this->getBackCod());
+        
         if ($stmt->rowCount()){
             return true;
         } else return false;
@@ -69,12 +70,12 @@ class Fornecedor extends consultaSql{
         } else return false;
     }
     
-    public function getByCodigo(){
+    public function getByCodigo($apenasChecar=false){
         $query="SELECT * FROM tbfornecedor WHERE cod=:COD";
         $param=array(":COD"=>$this->getCodigo());
         $result = $this->sql->select($query,$param);
         if (isset($result[0])){
-             $this->alimentarClasse($result[0]);
+             if (!$apenasChecar) $this->alimentarClasse($result[0]);
             return true;
         }
         else{

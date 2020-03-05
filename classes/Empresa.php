@@ -32,6 +32,7 @@ class Empresa extends consultaSql{
         $this->setLimiteDebito($limiteDebito);
         $this->setBackCod($cod);
         $this->sql=new Sql();
+        
     }
     public static function buscar($buscarPor){
         return self::buscarSql("tbempresa",$buscarPor);
@@ -53,8 +54,10 @@ class Empresa extends consultaSql{
     public function atualizar(){
         $query="UPDATE tbempresa SET cod=:COD, nomeFantasia=:NOMEFANTASIA,razaoSocial=:RAZAOSOCIAL,cnpj=:CNPJ,ie=:IE,isentoie=:ISENTOIE,conticms=:CONTICMS,telefone=:TELEFONE,celular=:CELULAR,endereco=:ENDERECO,email=:EMAIL,obs=:OBS,limiteDebito=:LIMITEDEBITO WHERE cod=:BACKCOD";
         $params=$this->returnParams();
+        $params[":BACKCOD"]=$this->getBackCod();
+        
         $stmt=$this->sql->query($query,$params);
-        array_push($params[":BACKCOD"],$this->getBackCod());
+        //print_r($stmt->errorInfo());
         if ($stmt->rowCount()){
             return true;
         } else return false;
@@ -71,16 +74,16 @@ class Empresa extends consultaSql{
         } else return false;
     }
     
-    public function getByCodigo(){
+    public function getByCodigo($apenasChecar=false){
         $query="SELECT * FROM tbempresa WHERE cod=:COD";
         $param=array(":COD"=>$this->getCodigo());
         $result = $this->sql->select($query,$param);
         if (isset($result[0])){
-             $this->alimentarClasse($result[0]);
+            if (!$apenasChecar) $this->alimentarClasse($result[0]);
             return true;
         } else{
-                 $this->setCodigo("");
-                 return false; 
+            $this->setCodigo("");
+            return false; 
               }   
     }
       private function alimentarClasse($dados){
@@ -198,6 +201,7 @@ class Empresa extends consultaSql{
 
         public function setObs($obs){
             $this->obs = $obs;
+            
         }
     
         public function getLimiteDebito(){
@@ -205,7 +209,7 @@ class Empresa extends consultaSql{
         }
 
         public function setLimiteDebito($limiteDebito){
-            $this->obs = $limiteDebito;
+            $this->limiteDebito = $limiteDebito;
         }
         public function setBackCod($cod){
             $this->backCod = $cod;

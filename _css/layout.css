@@ -207,10 +207,10 @@ table td{
     background-color:brown;
     border-radius: 15px;
 }
-.form_busca_produto, .form_busca_cliente{
+
+.form_busca_produto, .form_busca_cliente, .form_busca_cliente_pj, .form_busca_fornecedor{
     display: none;
 }
-
 
 .form_auxiliar{
     position: fixed;
