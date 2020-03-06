@@ -23,7 +23,13 @@ function resetFormProduto(){
 </script>
     <div class="form_busca_produto form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_produto').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaProduto" class="txtBox" placeholder="Buscar"><br>
+            <input type="text" id="txtFormAuxBuscaProduto" class="txtBox" placeholder="Buscar">
+            <select id="txtCampoPesquisaProduto" name="txtCampoPesquisaProduto" class="txtBox">
+                <option value="descricao">Produto</option>
+                <option value="cod">Código</option>
+                
+            </select>
+            <br>
             <button id="btnFormAuxBuscarProduto" name="btnBuscarProduto">Buscar</button>
             <table border="1" id="tableBusca">
             <tr>

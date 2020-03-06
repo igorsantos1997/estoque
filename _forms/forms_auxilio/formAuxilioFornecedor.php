@@ -24,7 +24,8 @@
     <div class="form_busca_fornecedor form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_fornecedor').css({display : 'none'});">X</span>
             <input type="text" id="txtFormAuxBuscaFornecedor" class="txtBox" placeholder="Buscar">
-            <select id="txtCampoPesquisaFornecedor" name="txtCampoPesquisaFornecedor">
+            
+            <select id="txtCampoPesquisaFornecedor" name="txtCampoPesquisaFornecedor" class="txtBox">
                 <option value="cod">Código</option>
                 <option value="razaoSocial">Razão Social</option>
                 <option value="nomeFantasia">Nome Fantasia</option>

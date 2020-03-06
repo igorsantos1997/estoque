@@ -23,7 +23,14 @@
 </script>
     <div class="form_busca_cliente form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_cliente').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaCliente" class="txtBox" placeholder="Buscar"><br>
+            <input type="text" id="txtFormAuxBuscaCliente" class="txtBox" placeholder="Buscar">
+            <select id="txtCampoPesquisaCliente" name="txtCampoPesquisaCliente" class="txtBox">
+                <option value="nome">Nome</option>
+                <option value="cod">Código</option>
+                <option value="cpf">CPF</option>
+                
+            </select>
+        <br>
             <button id="btnFormAuxBuscarCliente" name="btnBuscarCliente">Buscar</button>
             <table border="1" id="tableBuscaCli">
             <tr>

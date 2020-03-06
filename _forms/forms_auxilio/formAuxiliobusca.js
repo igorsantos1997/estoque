@@ -15,34 +15,39 @@ function formAuxBusca(event){
     var caminhoajax="";
     var busca="";
     var form="";
-    
+    var campo="";
     if (nome=="btnBuscarCliente"){
         busca=$("#txtFormAuxBuscaCliente").val();
         tabela="#tableBuscaCli";
         form="cliente";
         caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
-        $.post(caminhoajax,{ nome: busca, form: form},function(msg){ $(tabela).html(msg); });
+        campo=$("#txtCampoPesquisaCliente").val();
+        $.post(caminhoajax,{ nome: busca, form: form, campo: campo},function(msg){ $(tabela).html(msg); });
     } 
     else if (nome=="btnBuscarProduto"){
         busca=$("#txtFormAuxBuscaProduto").val();
         tabela="#tableBusca";
         form="produto";
         caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
-        $.post(caminhoajax,{ nome: busca, form: form},function(msg){ $(tabela).html(msg); });
+        campo=$("#txtCampoPesquisaProduto").val();
+        $.post(caminhoajax,{ nome: busca, form: form, campo: campo},function(msg){ $(tabela).html(msg); });
     }     
     else if (nome=="btnBuscarClientePj"){
         busca=$("#txtFormAuxBuscaClientePj").val();
         tabela="#tableBuscaCliPj";
         form="clientePj";
         caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
-        $.post(caminhoajax,{ nome: busca, form: form},function(msg){ $(tabela).html(msg); });
+        campo=$("#txtCampoPesquisaClientePj").val();
+        
+        $.post(caminhoajax,{ nome: busca, form: form, campo: campo},function(msg){ $(tabela).html(msg); });
     } 
     else if (nome=="btnBuscarFornecedor"){
         busca=$("#txtFormAuxBuscaFornecedor").val();
         tabela="#tableBuscaFornecedor";
         form="fornecedor";
         caminhoajax="../forms_auxilio/ajaxformAuxiliobusca.php";
-        $.post(caminhoajax,{ fornecedor: busca, form: form},function(msg){ $(tabela).html(msg); });
+        campo=$("#txtCampoPesquisaFornecedor").val();
+        $.post(caminhoajax,{ fornecedor: busca, form: form, campo:campo},function(msg){ $(tabela).html(msg); });
     } 
     $(tabela).html("");
    

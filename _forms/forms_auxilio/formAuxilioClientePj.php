@@ -27,11 +27,11 @@
     <div class="form_busca_cliente_pj form_auxiliar">
             <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_cliente_pj').css({display : 'none'});">X</span>
             <input type="text" id="txtFormAuxBuscaClientePj" class="txtBox" placeholder="Buscar">
-            <select id="txtCampoPesquisaClientePj" name="txtCampoPesquisaClientePj">
-                <option value="cod">Código</option>
+            <select id="txtCampoPesquisaClientePj" name="txtCampoPesquisaClientePj" class="txtBox">
                 <option value="razaoSocial">Razão Social</option>
                 <option value="nomeFantasia">Nome Fantasia</option>
-                
+                <option value="cod">Código</option>
+                <option value="cnpj">CNPJ</option>
             </select>
             <br>
             <button id="btnFormAuxBuscarClientePj" name="btnBuscarClientePj">Buscar</button>

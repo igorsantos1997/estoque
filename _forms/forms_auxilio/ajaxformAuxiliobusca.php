@@ -38,14 +38,12 @@
                 echo "<th>Cnpj</th>";
                 echo "</tr>";
                 foreach ($resultado as $valor){
-
                         echo "<tr>";
                         //if (is_array($valor)) preencheLista($valor);
                         echo "<td>".$valor["cod"]."</td>";
                         echo "<td>".$valor["razaoSocial"]."</td>";
                         echo "<td>".$valor["nomeFantasia"]."</td>";
                         echo "<td>".$valor["cnpj"]."</td>";
-                    
                         echo "</tr>";
                     }
                  echo "</table>";
@@ -63,14 +61,12 @@
                 echo "<th>Cnpj</th>";
                 echo "</tr>";
                 foreach ($resultado as $valor){
-
                         echo "<tr>";
                         //if (is_array($valor)) preencheLista($valor);
                         echo "<td>".$valor["cod"]."</td>";
                         echo "<td>".$valor["razaoSocial"]."</td>";
                         echo "<td>".$valor["nomeFantasia"]."</td>";
                         echo "<td>".$valor["cnpj"]."</td>";
-                    
                         echo "</tr>";
                     }
                  echo "</table>";
@@ -90,7 +86,6 @@
                 echo "<th>Preço</th>";
                 echo "</tr>";
                 foreach ($resultado as $valor){
-
                         echo "<tr>";
                         //if (is_array($valor)) preencheLista($valor);
                         echo "<td>".$valor["cod"]."</td>";
@@ -100,7 +95,6 @@
                         echo "<td>".$valor["fornecedor"]."</td>";
                         echo "<td>".$valor["precoVenda"]."</td>";
                         echo "</tr>";
-
                     }
                  echo "</table>";
     }
