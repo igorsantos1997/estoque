@@ -57,7 +57,7 @@ $(function (e){
     
     $(document).on("click","#fechar_menu_box",function(){$(".menu_box").hide()});
     
-    $(document).on("click","li a",function(){
+    $(document).on("click",".dropdown-menu a",function(){
         var id=$(this).attr("id").split("_");
         var pasta=id[0];
         var arquivo=id[1];
