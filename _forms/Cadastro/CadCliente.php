@@ -1,6 +1,10 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="../../_css/layout.css">
+        <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
+        
+        
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <meta charset="utf-8">
@@ -8,7 +12,7 @@
             $(function(){
                 $("#btnFormAuxCli").on("click",function(){
                 
-                $(".form_busca_cliente").css({display: "block"});                     
+                //$(".form_busca_cliente").css({display: "block"});                     
                 });
             });
             function buscarCli(){
@@ -53,24 +57,71 @@
         <p class="form_titulo">Cadastrar/editar Cliente Pessoa Física</p>
         <div id="resultado"></div>
             <form method="post">
-                <label for="txtCodigoCli">Código</label><input type="number" placeholder="Código" name="txtCodigoCli" id="txtCodigoCli" class="txtBox"><button id="btnFormAuxCli" class="btnLupa" type="button"></button>(Código gerado automaticamente caso campo estaja vazio!)<br>
-                <label for="txtNome">Nome</label><input type="text" placeholder="Nome" name="txtNome" id="txtNome" class="txtBox"><br>
-                <label for="txtNascimento">Nascimento</label><input type="date" placeholder="Data de Nascimento" name="txtNascimento" id="txtNascimento" class="txtBox"><br>
-                <label for="txtSexo">Sexo</label><select name="txtSexo" id="txtSexo" class="txtBox">
-                    <option value="M">M</option>
-                    <option value="F">F</option>
-                </select><br>
-                <label for="txtTelefone">Telefone</label><input type="tel" placeholder="Telefone" name="txtTelefone" id="txtTelefone" class="txtBox">
-                <label for="txtCelular">Celular</label><input type="tel" placeholder="Celular" name="txtCelular" id="txtCelular" class="txtBox"><br>
-                <label for="txtRg">RG</label><input type="text" placeholder="RG" name="txtRg" id="txtRg" class="txtBox"><br>
-                <label for="txtCpf">CPF</label><input type="text" placeholder="CPF" name="txtCpf" id="txtCpf" class="txtBox"><br>
-                <label for="txtEndereco">Endereço</label><input type="text" placeholder="Endereço" name="txtEndereco" id="txtEndereco" class="txtBox"><br>
-                <label for="txtEmail">Email</label><input type="email" placeholder="Email" name="txtEmail" id="txtEmail" class="txtBox"><br>
-                <label for="txtObs">Observações</label><input type="text" placeholder="Observações" name="txtObs" id="txtObs" class="txtBox"><br>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="txtCodigoCli">Código</label>
+                        
+                        <div class="form-inline">
+                        <input class="form-control w-75" type="number" placeholder="Código" name="txtCodigoCli" id="txtCodigoCli"><button id="btnFormAuxCli" class="btnLupa" type="button" data-target="#modalBuscaCliente" data-toggle="modal"></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                         <label for="txtNome">Nome do Cliente</label><input type="text" class="form-control w-100" placeholder="Nome" name="txtNome" id="txtNome">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="txtNascimento">Nascimento</label><input type="date" placeholder="Data de Nascimento" name="txtNascimento" id="txtNascimento" class="form-control w-75">
+                    </div>
+                     <div class="form-group col-md-4">
+                        <label for="txtSexo">Sexo</label>
+                         <select name="txtSexo" id="txtSexo" class="form-control w-25">
+                         <option value="M">M</option>
+                         <option value="F">F</option>
+                         </select>
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                         <label for="txtTelefone">Telefone</label><input type="tel" placeholder="Telefone" name="txtTelefone" id="txtTelefone" class="form-control ">
+                </div>
+                    <div class="form-group col-md-4">
+                        <label for="txtCelular">Celular</label><input type="tel" placeholder="Celular" name="txtCelular" id="txtCelular" class="form-control">
+                </div>
+                    <div class="form-group col-md-4">
+                        <label for="txtEmail">Email</label><input type="email" placeholder="Email" name="txtEmail" id="txtEmail" class="form-control">
+                    </div>
+                </div>
+                
+               
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="txtRg">RG</label><input type="text" placeholder="RG" name="txtRg" id="txtRg" class="form-control w-100">
+                    </div>
+                
+                    <div class="form-group col-md-6">
+                        <label for="txtCpf">CPF</label><input type="text" placeholder="CPF" name="txtCpf" id="txtCpf" class="form-control w-100">
+                    </div>
+                </div>
+                
+               <div class="form-row">
+                    <div class="form-group col-md-12">
+                    <label for="txtEndereco">Endereço</label><input type="text" placeholder="Endereço" name="txtEndereco" id="txtEndereco" class="form-control w-100">
+                   </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
+                    </div></div>
                 <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-                <button id="btnCadastrar">Cadastrar</button>
+                <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
             </form>
+         <script src="../../_lib/jquery/dist/jquery.js"></script>
+        <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
+        <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
     </body>
+    
 </html>
 <?php
     require_once("../../config.php");
@@ -119,7 +170,7 @@
         }
         } 
 function preencherCampos(){
-        $codigo=$_POST["txtCodigo"];
+        $codigo=$_POST["txtCodigoCli"];
         $nome=$_POST["txtNome"];
         $nascimento=$_POST["txtNascimento"];
         $sexo=$_POST["txtSexo"];

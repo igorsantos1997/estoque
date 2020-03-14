@@ -1,12 +1,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../_css/layout.css">
+        <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <meta charset="utf-8">
         <script>
             $(function(){
-                $("#btnFormAuxForecedor").on("click",function(){
+                $("#btnFormAuxFornecedor").on("click",function(){
                 
                 $(".form_busca_fornecedor").css({display: "block"});                     
                 });
@@ -56,21 +57,66 @@
         <div id="resultadoNegativo"></div>
         <p class="form_titulo">Cadastro de Fornecedor</p>
     <form method="post">
-        <label for="txtCodigoCliPj">Código</label><input type="number" placeholder="Código" name="txtCodigoCliPj" id="txtCodigoCliPj" class="txtBox"><button id="btnFormAuxForecedor" class="btnLupa" type="button"></button>(Código gerado automaticamente caso campo estaja vazio!)<br>
-        <label for="txtRazaoSocial">Razão Social</label><input type="text" placeholder="Razão Social" name="txtRazaoSocial" id="txtRazaoSocial" class="txtBox"><br>
-        <label for="txtNomeFantasia">Nome Fantasia</label><input type="text" placeholder="Nome Fantasia" name="txtNomeFantasia" id="txtNomeFantasia" class="txtBox"><br>
-        <label for="txtTelefone">Telefone</label><input type="tel" placeholder="Telefone" name="txtTelefone" id="txtTelefone" class="txtBox">
-        <label for="txtCelular">Celular</label><input type="tel" placeholder="Celular" name="txtCelular" id="txtCelular" class="txtBox"><br>
-        <label for="txtCnpj">CNPJ</label><input type="text" placeholder="CNPJ" name="txtCnpj" id="txtCnpj" class="txtBox"><br>
-        <label for="txtEndereco">Endereço</label><input type="text" placeholder="Endereço" name="txtEndereco" id="txtEndereco" class="txtBox"><br>
-        <label for="txtEmail">Email</label><input type="email" placeholder="Email" name="txtEmail" id="txtEmail" class="txtBox"><br>
-        <label for="txtIE">Inscrição Estadual</label><input type="text" placeholder="Incrição Estadual" name="txtIE" id="txtIE" class="txtBox"><br>
-        <input type="checkbox" name="chbxIsentoIe" id="chbxIsentoIe"><label for="chbxIsentoIe">Isento IE</label>
-        <input type="checkbox" name="chbxContIcms" id="chbxContIcms"><label for="chbxContIcms">Contribuinte ICMS</label><br>
-        <label for="txtObs">Observações</label><input type="text" placeholder="Observações" name="txtObs" id="txtObs" class="txtBox"><br>
+      <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="txtCodigoCliPj">Código</label>
+                <div class="form-inline">
+                    <input type="number" placeholder="Código" name="txtCodigoCliPj" id="txtCodigoCliPj" class="form-control w-75"><button id="btnFormAuxFornecedor" class="btnLupa" type="button" data-toggle="modal" data-target="#modalBuscaFornecedor"></button>
+                </div>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="txtRazaoSocial">Razão Social</label><input type="text" placeholder="Razão Social" name="txtRazaoSocial" id="txtRazaoSocial" class="form-control w-100">
+            </div>
+            <div class="form-group col-md-5">
+             <label for="txtNomeFantasia">Nome Fantasia</label><input type="text" placeholder="Nome Fantasia" name="txtNomeFantasia" id="txtNomeFantasia" class="form-control w-100">
+            </div>
+        </div>
+       
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="txtTelefone">Telefone</label><input type="tel" placeholder="Telefone" name="txtTelefone" id="txtTelefone" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                 <label for="txtCelular">Celular</label><input type="tel" placeholder="Celular" name="txtCelular" id="txtCelular" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="txtEmail">Email</label><input type="email" placeholder="Email" name="txtEmail" id="txtEmail" class="form-control">
+            </div>
+        </div>
+       
+       <div class="form-row">
+            <div class="form-group col-md-6">
+        <label for="txtCnpj">CNPJ</label><input type="text" placeholder="CNPJ" name="txtCnpj" id="txtCnpj" class="form-control w-100">
+            </div>
+           <div class="form-group col-md-6">
+               <label for="txtIE">Inscrição Estadual</label><input type="text" placeholder="Incrição Estadual" name="txtIE" id="txtIE" class="form-control w-100">
+           </div>
+         </div>
+         <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="chbxIsentoIe" class="form-check-label">Isento IE</label>
+                <input type="checkbox" name="chbxIsentoIe" id="chbxIsentoIe" class="form-check-input">
+            </div>
+        </div>
+         <div class="form-row">
+            <div class="form-group col-md-12">
+               <label for="chbxContIcms" class="form-check-label"> Contribuinte ICMS</label><input type="checkbox" name="chbxContIcms" id="chbxContIcms" class="form-check-input">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+         <label for="txtEndereco">Endereço</label><input type="text" placeholder="Endereço" name="txtEndereco" id="txtEndereco" class="form-control w-100">
+            </div>
+        </div>
+        
+        
+        <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
         <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-        <button id="btnCadastrar">Cadastrar</button>
+        <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
     </form>
+                 <script src="../../_lib/jquery/dist/jquery.js"></script>
+        <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
+        <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
 </html>
 <?php
     require_once("../../config.php");

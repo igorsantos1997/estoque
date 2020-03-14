@@ -1,5 +1,7 @@
 <html>
-    <link rel="stylesheet" href="../../_css/layout.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+           <link rel="stylesheet" href="../../_css/layout.css">
+    <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
     <script src="../../_js/jquery-3.4.1.min.js"></script>
     <script src="../../_js/forms.js"></script>
     <script src="EstoqueScriptBuscas.js"></script>
@@ -224,32 +226,71 @@
         ?>
         <p class="form_titulo">Venda</p>
         <div id="result"></div>
-        <div id="controls">
-            <label for="txtCodigo">Codigo</label><input type="number" name="txtCodigo" id="txtCodigo" placeholder="Codigo" class="txtBox"><button id="btnFormAuxiliar" class="btnLupa"></button>
-            
-            <label for="txtProduto">Produto</label><input type="text" name="txtProduto" id="txtProduto" placeholder="Produto" class="txtBox" disabled>
-            <label for="txtPreco">Preço</label><input type="number" name="txtPreco" id="txtPreco" placeholder="Preço" class="txtBox" disabled>
-            <label for="txtQntd">Quantidade</label><input type="number" name="txtQntd" id="txtQntd" placeholder="Quantidade" class="txtBox">
+        
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="txtCodigo">Codigo do Produto</label>
+                    <div class="form-inline">
+                        <input type="number" name="txtCodigo" id="txtCodigo" placeholder="Codigo" class="form-control w-75"><button id="btnFormAuxiliar" class="btnLupa" data-toggle="modal" data-target="#modalBuscaProduto"></button>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 col-lg-6">
+                    <label for="txtProduto">Nome do Produto</label><input type="text" name="txtProduto" id="txtProduto" placeholder="Produto" class="form-control w-100" disabled>
+                </div>
+                <div class="form-group col-md-3 col-lg-2">
+                    <label for="txtPreco">Preço de Venda</label><input type="number" name="txtPreco" id="txtPreco" placeholder="Preço" class="form-control w-100" disabled>
+                </div>
+                <div class="form-group col-md-3 col-lg-2">
+                    <label for="txtQntd">Quantidade</label><input type="number" name="txtQntd" id="txtQntd" placeholder="Quantidade" class="form-control w-100">
+                </div>
+            </div>
+        
+        
+        <div class="form-row my-5">
+            <div class="form-group col-md-6">
+                <button id="btnBuscar" class="btn btn-primary w-100 ">Buscar Produto</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button id="btnAddCaixa" class="btn btn-success w-100 ">Adicionar Produto</button>
+            </div>
         </div>
         
+        
+        <div class="form-row">
+            <div class="form-group col-md-2">
+            <label for="txtCodigoCli">Codigo do Cliente</label>
+                <div class="form-inline">
+                     <input type="number" name="txtCodigoCli" id="txtCodigoCli" placeholder="Codigo" class="form-control w-75"><button id="btnFormAuxiliarCli" class="btnLupa" data-toggle="modal" data-target="#modalBuscaCliente"></button>
+                </div>
+            </div>
+             <div class="form-group col-md-10">
+                <label for="txtCliente">Cliente</label><input type="text" name="txtCliente" id="txtCliente" placeholder="Cliente" class="form-control w-100" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <button id="btnBuscarCli" class="btn btn-primary w-100">Buscar Cliente</button>
+            </div>
+        </div>
+        
+        <div class="form-row mt-5">
+            <div class="form-group col-md-12">
+                <div class="form-inline">
+                    <h2 class="display-5">Total: R$</h2>
+                    <h2 class="display-5" id="valorTotal">0.00</h2>
+                </div>
+            </div> 
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="txtDesconto">Desconto (%)</label><input type="number" id="txtDesconto" class="form-control" value="0">
+            </div>
+            <div class="form-group col-md-12">
+                <button id="btnFinalizarVenda" class="btn btn-warning w-100">Finalizar</button>
+            </div>
+        </div>
 
-        <button id="btnBuscar">Buscar</button>
-        
-        <button id="btnAddCaixa" class="btnCarrinho" style="float:right"></button>
-        <br><br>
-        <div id="controlsCli">
-            <label for="txtCodigoCli">Codigo</label><input type="number" name="txtCodigoCli" id="txtCodigoCli" placeholder="Codigo do Cliente" class="txtBox"><button id="btnFormAuxiliarCli" class="btnLupa"></button>
-            <label for="txtCliente">Cliente</label><input type="text" name="txtCliente" id="txtCliente" placeholder="Cliente" class="txtBox" disabled>
-        </div>
-        <button id="btnBuscarCli">Buscar</button>
-        <br>
-        <div style="float:right;font-size: 1.2em;color: red" id="valorTotal">0</div>
-        <div style="float:right;font-size: 1.2em;color: red">Total: R$</div>
-        <br> 
-        <label for="txtDesconto">Desconto (%)</label><input type="number" id="txtDesconto" class="txtBox" value="0">
-        
-        <button id="btnFinalizarVenda" style="float:right">Finalizar</button>
-        <table border="1" id="tableProdutosCaixa">
+        <table class="table table-hover table-responsive-md table-bordered table-striped text-center" id="tableProdutosCaixa">
             <tr>
                 <th>Código</th>
                 <th>Descrição</th>
@@ -259,6 +300,9 @@
             </tr>
         </table>
     </body>
+             <script src="../../_lib/jquery/dist/jquery.js"></script>
+        <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
+        <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
 </html>
 <?php
 

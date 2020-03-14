@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="_lib/bootstrap/dist/css/bootstrap.css">
+        
         <link rel="stylesheet" href="_css/layout.css">
         <script src="_js/jquery-3.4.1.min.js"></script>
         <script src="_js/menu.js"></script>
@@ -18,13 +19,16 @@
             iframe{
                 background-color: white;
             }
+            .bg-red{
+              background-color: #B22222	;
+          }
         </style>
     </head>
     <body>
 
         <div class="menu_box"></div>
         
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-1">
             <div class="container">
                 <a class="navbar-brand" href="index.php">Estoque</a>
                 <button class="navbar-toggler" type="button" data-target="#navbarSite" data-toggle="collapse">
@@ -63,7 +67,7 @@
         </nav>
 
         
-            <iframe id="frame_conteudo" src=""  width="100%" height="95%" style="margin: 10px auto;"></iframe>
+            <iframe id="frame_conteudo" src="" width="100%" height="95%" style="margin: 0 auto;"></iframe>
         
     <script src="_lib/jquery/dist/jquery.js"></script>
     <script src="_lib/popper.js/dist/umd/popper.js"></script>

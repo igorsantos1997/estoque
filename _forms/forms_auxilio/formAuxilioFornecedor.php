@@ -9,7 +9,8 @@
                 $("#txtCodigoCliPj").val(codigo);
                 buscarFornecedor();
                 resetFormFornecedor();
-                $(".form_busca_fornecedor").css({display: "none"});
+                $("#modalBuscaFornecedor .close").click();
+                $("#modalBuscaFornecedor .close").trigger("click"); 
                 
             }
         });
@@ -21,26 +22,49 @@
         }); 
     }
 </script>
-    <div class="form_busca_fornecedor form_auxiliar">
-            <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_fornecedor').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaFornecedor" class="txtBox" placeholder="Buscar">
+<style>
+    td{
+        cursor: pointer;
+    }
+</style>
+    <div class="modal fade" tabindex="-1" id="modalBuscaFornecedor" role="dialog">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar por Fornecedor</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="txtFormAuxBuscaFornecedor" class="form-control w-100" placeholder="Buscar">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select id="txtCampoPesquisaFornecedor" name="txtCampoPesquisaFornecedor" class="form-control w-100">
+                            <option value="cod">Código</option>
+                            <option value="razaoSocial">Razão Social</option>
+                            <option value="nomeFantasia">Nome Fantasia</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button id="btnFormAuxBuscarFornecedor" name="btnBuscarFornecedor" class="btn btn-primary w-100">Buscar</button>
+                    </div>
+                    
+                </div>
             
-            <select id="txtCampoPesquisaFornecedor" name="txtCampoPesquisaFornecedor" class="txtBox">
-                <option value="cod">Código</option>
-                <option value="razaoSocial">Razão Social</option>
-                <option value="nomeFantasia">Nome Fantasia</option>
-                
-            </select>
-            <br>
-            <button id="btnFormAuxBuscarFornecedor" name="btnBuscarFornecedor">Buscar</button>
-            <table border="1" id="tableBuscaFornecedor">
-            <tr>
-                <th>Código</th>
-                <th>Razão Social</th>
-                <th>Nome Fantasia</th>
-                <th>CNPJ</th>
-            </tr>
+            <table id="tableBuscaFornecedor" class="table table-responsive-md table-hover table-dark table-bordered table-striped text-center">
+                <tr>
+                    <th>Código</th>
+                    <th>Razão Social</th>
+                    <th>Nome Fantasia</th>
+                    <th>CNPJ</th>
+                </tr>
             </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            
         </div>
-<?php
-?>
+    </div>
+</div>

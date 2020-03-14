@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../_css/layout.css">
+    <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <meta charset="utf-8">
@@ -62,32 +63,83 @@
      <?php require_once ("..".DIRECTORY_SEPARATOR."forms_auxilio".DIRECTORY_SEPARATOR."formAuxilioProduto.php")?>
         <p class="form_titulo">Cadastro de Produto</p>
         <form method="post">
-            <label for="txtCodigo">Código</label><input type="number" placeholder="Código" name="txtCodigo" id="txtCodigo" class="txtBox"><button id="btnFormAuxProduto" class="btnLupa" type="button"></button>(Código gerado automaticamente caso campo estaja vazio!)<br>
-            <label for="txtDescricao">Descrição</label><input type="text" placeholder="Descrição" name="txtDescricao" id="txtDescricao" class="txtBox"><br>
-            <label for="txtPesoLiquido">Peso Líquido</label><input type="number" placeholder="Peso Líquido" name="txtPesoLiquido" id="txtPesoLiquido" class="txtBox"><br>
-            <label for="txtPesoBruto">Peso Bruto</label><input type="number" placeholder="Peso Bruto" name="txtPesoBruto" id="txtPesoBruto" class="txtBox"><br>
-            <label for="txtCategoria">Categoria</label><input type="text" placeholder="Categoria" name="txtCategoria" id="txtCategoria" class="txtBox">
-            <label for="txtSubCategoria">Sub Categoria</label><input type="text" placeholder="Sub Categoria" name="txtSubCategoria" id="txtSubCategoria" class="txtBox">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                <label for="txtCodigo">Código</label>
+                    <div class="form-inline">
+                         <input type="number" placeholder="Código" name="txtCodigo" id="txtCodigo" class="form-control w-75"><button id="btnFormAuxProduto" class="btnLupa" type="button" data-toggle="modal" data-target="#modalBuscaProduto"></button>
+                    </div>
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="txtDescricao">Descrição</label><input type="text" placeholder="Descrição" name="txtDescricao" id="txtDescricao" class="form-control w-100">
+                </div>
+            </div>
             
-            <label for="txtMarca">Marca</label><input type="text" placeholder="Marca" name="txtMarca" id="txtMarca" class="txtBox"><br>
-            <label for="txtPrecoVenda">Preço de Venda</label><input type="number" placeholder="Preço de Venda" name="txtPrecoVenda" id="txtPrecoVenda" class="txtBox"><br>
-            <label for="txtPrecoCusto">Preço de Custo</label><input type="number" placeholder="Preço de Custo" name="txtPrecoCusto" id="txtPrecoCusto" class="txtBox"><br>
-            <label for="txtEstoqueAtual">Estoque Atual</label><input type="number" placeholder="Estoque Atual" name="txtEstoqueAtual" id="txtEstoqueAtual" class="txtBox"><br>
-            <label for="txtLimiteEstoque">Limite de Estoque</label><input type="number" placeholder="Limite de Estoque" name="txtLimiteEstoque" id="txtLimiteEstoque" class="txtBox"><br>
-            <label for="txtObs">Observações</label><input type="text" placeholder="Observações" name="txtObs" id="txtObs" class="txtBox"><br>
-            <label for="txtFornecedor">Fornecedor</label><input type="text" placeholder="Fornecedor" name="txtFornecedor" id="txtFornecedor" class="txtBox"><br>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+            <label for="txtPesoLiquido">Peso Líquido</label><input type="number" placeholder="Peso Líquido" name="txtPesoLiquido" id="txtPesoLiquido" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="txtPesoBruto">Peso Bruto</label><input type="number" placeholder="Peso Bruto" name="txtPesoBruto" id="txtPesoBruto" class="form-control w-100"></div>
+                <div class="form-group col-md-4">
+            <label for="txtCategoria">Categoria</label><input type="text" placeholder="Categoria" name="txtCategoria" id="txtCategoria" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-4">
+            <label for="txtSubCategoria">Sub Categoria</label><input type="text" placeholder="Sub Categoria" name="txtSubCategoria" id="txtSubCategoria" class="form-control w-100">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                     <label for="txtMarca">Marca</label><input type="text" placeholder="Marca" name="txtMarca" id="txtMarca" class="form-control w-100">
+                </div>                
+                <div class="form-group col-md-2">
+                     <label for="txtFornecedor">Fornecedor</label><input type="text" placeholder="Fornecedor" name="txtFornecedor" id="txtFornecedor" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="txtPrecoVenda">Preço de Venda</label><input type="number" placeholder="Preço de Venda" name="txtPrecoVenda" id="txtPrecoVenda" class="form-control">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="txtPrecoCusto">Preço de Custo</label><input type="number" placeholder="Preço de Custo" name="txtPrecoCusto" id="txtPrecoCusto" class="form-control">
+                </div>
+                 <div class="form-group col-md-2">
+                      <label for="txtEstoqueAtual">Estoque Atual</label><input type="number" placeholder="Estoque Atual" name="txtEstoqueAtual" id="txtEstoqueAtual" class="form-control">
+                </div>
+                <div class="form-group col-md-2">
+                     <label for="txtLimiteEstoque">Limite de Estoque</label><input type="number" placeholder="Limite de Estoque" name="txtLimiteEstoque" id="txtLimiteEstoque" class="form-control">
+                </div>
+            </div>
+            
+           
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
+                </div>
+            </div>
+           
+            
             
             <p class="separator">Tributação</p>
-            
-            <label for="txtNcm">NCM</label><input type="number" placeholder="NCM" name="txtNcm" id="txtNcm" class="txtBox"><br>
-            <label for="txtCest">CEST</label><input type="number" placeholder="CEST" name="txtCest" id="txtCest" class="txtBox"><br>
-            <label for="txtCodBeneficio">Código Benefício</label><input type="number" placeholder="Código Benefício" name="txtCodBeneficio" id="txtCodBeneficio" class="txtBox"><br>
-            <label for="txtTributacao">Tributação</label><input type="text" placeholder="Tributação" name="txtTributacao" id="txtTributacao" class="txtBox"><br>
-                           
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="txtNcm">NCM</label><input type="number" placeholder="NCM" name="txtNcm" id="txtNcm" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="txtCest">CEST</label><input type="number" placeholder="CEST" name="txtCest" id="txtCest" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="txtCodBeneficio">Código Benefício</label><input type="number" placeholder="Código Benefício" name="txtCodBeneficio" id="txtCodBeneficio" class="form-control w-100">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="txtTributacao">Tributação</label><input type="text" placeholder="Tributação" name="txtTributacao" id="txtTributacao" class="form-control w-100">
+                </div>
+                
+            </div>         
             <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-            <button id="btnCadastrar">Cadastrar</button>
+            <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
         </form>
-    
+                 <script src="../../_lib/jquery/dist/jquery.js"></script>
+        <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
+        <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
 </html>
 <?php
     require_once("../../config.php");

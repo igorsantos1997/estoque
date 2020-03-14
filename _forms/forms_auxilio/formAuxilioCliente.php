@@ -8,8 +8,9 @@
                 $("#txtCodigoCli").val(codigo);
                 buscarCli();
                 resetFormCliente();
-                $(".form_busca_cliente").css({display: "none"});
-                
+                $("#modalBuscaCliente .close").click();
+                $("#modalBuscaCliente .close").trigger("click"); 
+                 
             }
         });
         resetFormCliente();
@@ -21,24 +22,50 @@
         $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "", form: "cliente"},function(msg){ $("#tableBuscaCli").html(msg); }); 
     }
 </script>
-    <div class="form_busca_cliente form_auxiliar">
-            <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_cliente').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaCliente" class="txtBox" placeholder="Buscar">
-            <select id="txtCampoPesquisaCliente" name="txtCampoPesquisaCliente" class="txtBox">
-                <option value="nome">Nome</option>
-                <option value="cod">Código</option>
-                <option value="cpf">CPF</option>
-                
-            </select>
-        <br>
-            <button id="btnFormAuxBuscarCliente" name="btnBuscarCliente">Buscar</button>
-            <table border="1" id="tableBuscaCli">
-            <tr>
-                <th>Código</th>
-                <th>Nome</th>
-                <th>CPF</th>
-            </tr>
+<style>
+    td{
+        cursor: pointer;
+    }
+</style>
+    <div class="modal fade" tabindex="-1" id="modalBuscaCliente" role="dialog">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar por Cliente Pessoa Física</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="txtFormAuxBuscaCliente" class="form-control w-100" placeholder="Buscar">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select id="txtCampoPesquisaCliente" name="txtCampoPesquisaCliente" class="form-control w-100">
+                        <option value="nome">Nome</option>
+                        <option value="cod">Código</option>
+                        <option value="cpf">CPF</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button id="btnFormAuxBuscarCliente" name="btnBuscarCliente" class="btn btn-primary w-100">Buscar</button>
+                    </div>
+                    
+                </div>
+            
+            <table id="tableBuscaCli" class="table table-responsive-md table-hover table-dark table-bordered table-striped text-center">
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                </tr>
             </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            
         </div>
+    </div>
+</div>
 <?php
 ?>

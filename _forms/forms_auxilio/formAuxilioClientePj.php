@@ -8,7 +8,8 @@
                 $("#txtCodigoCliPj").val(codigo);
                 buscarCliPj();
                 resetFormClientePj();
-                $(".form_busca_cliente_pj").css({display: "none"});
+                $("#modalBuscaClientePj .close").click();
+                $("#modalBuscaClientePj .close").trigger("click"); 
                 
             }
         });
@@ -24,25 +25,52 @@
         $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "", form: "clientePj"},function(msg){ $("#tableBuscaCliPj").html(msg); }); 
     }
 </script>
-    <div class="form_busca_cliente_pj form_auxiliar">
-            <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_cliente_pj').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaClientePj" class="txtBox" placeholder="Buscar">
-            <select id="txtCampoPesquisaClientePj" name="txtCampoPesquisaClientePj" class="txtBox">
-                <option value="razaoSocial">Razão Social</option>
-                <option value="nomeFantasia">Nome Fantasia</option>
-                <option value="cod">Código</option>
-                <option value="cnpj">CNPJ</option>
-            </select>
-            <br>
-            <button id="btnFormAuxBuscarClientePj" name="btnBuscarClientePj">Buscar</button>
-            <table border="1" id="tableBuscaCliPj">
-            <tr>
+<style>
+    td{
+        cursor: pointer;
+    }
+</style>
+ <div class="modal fade" tabindex="-1" id="modalBuscaClientePj" role="dialog">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar por Cliente Pessoa Jurídica</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="txtFormAuxBuscaClientePj" class="form-control w-100" placeholder="Buscar">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select id="txtCampoPesquisaClientePj" name="txtCampoPesquisaClientePj" class="form-control w-100">
+                        <option value="razaoSocial">Razão Social</option>
+                        <option value="nomeFantasia">Nome Fantasia</option>
+                        <option value="cod">Código</option>
+                        <option value="cnpj">CNPJ</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button id="btnFormAuxBuscarClientePj" name="btnBuscarClientePj" class="btn btn-primary w-100">Buscar</button>
+                    </div>
+                    
+                </div>
+            
+            <table id="tableBuscaCliPj" class="table table-responsive-md table-hover table-dark table-bordered table-striped text-center">
+                <tr>
                 <th>Código</th>
                 <th>Razão Social</th>
                 <th>Nome Fantasia</th>
                 <th>CNPJ</th>
-            </tr>
+                </tr>
             </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            
         </div>
+    </div>
+</div>
 <?php
 ?>

@@ -8,7 +8,8 @@
                 $("#txtCodigo").val(codigo);
                 buscar();
                 resetFormProduto();
-                $(".form_busca_produto").css({display: "none"});
+               $("#modalBuscaProduto .close").click();
+                $("#modalBuscaProduto .close").trigger("click"); 
                 
             }
         });
@@ -21,17 +22,36 @@ function resetFormProduto(){
     $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ nome: "",form: "produto"},function(msg){ $("#tableBusca").html(msg); }); //Preencher 
 }
 </script>
-    <div class="form_busca_produto form_auxiliar">
-            <span style="float:right;cursor:pointer;" onclick="javascript:$('.form_busca_produto').css({display : 'none'});">X</span>
-            <input type="text" id="txtFormAuxBuscaProduto" class="txtBox" placeholder="Buscar">
-            <select id="txtCampoPesquisaProduto" name="txtCampoPesquisaProduto" class="txtBox">
-                <option value="descricao">Produto</option>
-                <option value="cod">Código</option>
-                
-            </select>
-            <br>
-            <button id="btnFormAuxBuscarProduto" name="btnBuscarProduto">Buscar</button>
-            <table border="1" id="tableBusca">
+<style>
+    td{
+        cursor: pointer;
+    }
+</style>
+<div class="modal fade" tabindex="-1" id="modalBuscaProduto" role="dialog">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar por Produto</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="txtFormAuxBuscaProduto" class="form-control w-100" placeholder="Buscar">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select id="txtCampoPesquisaProduto" name="txtCampoPesquisaProduto" class="form-control w-100">
+                            <option value="descricao">Produto</option>
+                            <option value="cod">Código</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button id="btnFormAuxBuscarProduto" name="btnBuscarProduto" class="btn btn-primary w-100">Buscar</button>
+                    </div>
+                    
+                </div>
+            
+            <table id="tableBusca" class="table table-responsive-md table-hover table-dark table-bordered table-striped text-center">
             <tr>
                 <th>Código</th>
                 <th>Descrição</th>
@@ -41,7 +61,14 @@ function resetFormProduto(){
                 <th>Preço</th>
             </tr>
             </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            
         </div>
+    </div>
+</div>
 <?php
 
 ?>
