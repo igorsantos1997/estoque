@@ -114,6 +114,7 @@
         <input type="hidden" name="txtEditar" id="txtEditar" value="n">
         <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
     </form>
+    <?php require_once("..".DIRECTORY_SEPARATOR."modalAviso.php"); ?>
                  <script src="../../_lib/jquery/dist/jquery.js"></script>
         <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
         <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -145,27 +146,27 @@
         
         $fornecedor= new Fornecedor($codigo,$nomeFantasia,$razaoSocial,$cnpj,$ie,$isentoIe,$contIcms,$telefone,$celular,$endereco,$email,$obs);
         if($fornecedor->getByCodigo(true) and $editar=="n"){
-            ?><script>resultadoNegativo("Código já existente! Favor alterar código.");</script><?php
+            ?><script>modalAviso("Erro","Código já existente! Favor alterar código.");</script><?php
             preencherCampos();
         } elseif(empty($razaoSocial) and empty($nomeFantasia)) {
-            ?><script>resultadoNegativo("Insira razão social ou nome fantasia!");</script><?php
+            ?><script>modalAviso("Erro","Insira razão social ou nome fantasia!");</script><?php
             preencherCampos();
         }
         else {
             if ($editar=="s"){
                         if (!$fornecedor->atualizar()){
-                            ?><script>resultadoNegativo("Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Atualizado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Atualizado com Sucesso!");</script><?php
                         } 
             }
             else{
                         if (!$fornecedor->inserir()){
-                            ?><script>resultadoNegativo("Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Cadastrado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Cadastrado com Sucesso!");</script><?php
                         } 
             }
 

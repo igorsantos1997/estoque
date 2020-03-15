@@ -3,8 +3,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="../../_css/layout.css">
         <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
-        
-        
         <script src="../../_js/jquery-3.4.1.min.js"></script>
         <script src="../../_js/forms.js"></script>
         <meta charset="utf-8">
@@ -121,7 +119,9 @@
         <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
         <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
     </body>
-    
+    <?php 
+        require_once("..".DIRECTORY_SEPARATOR."modalAviso.php");
+    ?>
 </html>
 <?php
     require_once("../../config.php");
@@ -143,27 +143,27 @@
         $cliente = new Cliente($codigo,$nome,$nascimento,$sexo,$telefone,$celular,$rg,$cpf,$endereco,$email,$obs);
 
         if($cliente->getByCodigo(true) and $editar=="n"){
-            ?><script>resultadoNegativo("Código já existente! Favor alterar código.");</script><?php
+            ?><script>modalAviso("Erro","Código já existente! Favor alterar código.");</script><?php
             preencherCampos();
         } elseif(empty($nome)) {
-            ?><script>resultadoNegativo("Nome não pode ficar vazio.");</script><?php
+            ?><script>modalAviso("Erro","Campo 'Nome do Cliente' não pode ficar vazio.");</script><?php
             preencherCampos();
         }
         else {
             if ($editar=="s"){
                         if (!$cliente->atualizar()){
-                            ?><script>resultadoNegativo("Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Atualizado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Atualizado com Sucesso!");</script><?php
                         } 
             }
             else{
                         if (!$cliente->inserir()){
-                            ?><script>resultadoNegativo("Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Cadastrado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Cadastrado com Sucesso!");</script><?php
                         } 
             }
 

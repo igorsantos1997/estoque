@@ -135,8 +135,14 @@
                 
             </div>         
             <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-            <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <button id="btnCadastrar" class="btn btn-primary w-100">Cadastrar</button>
+                </div>
+            </div>
+            
         </form>
+        <?php require_once("..".DIRECTORY_SEPARATOR."modalAviso.php"); ?>
                  <script src="../../_lib/jquery/dist/jquery.js"></script>
         <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
         <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -165,27 +171,27 @@
         $editar=$_POST["txtEditar"];
         $produto = new Produto($codigo,$descricao,$pesoLiquido,$pesoBruto,$categoria,$subCategoria,$marca,$precoVenda,$precoCusto,$estoqueAtual,$limiteEstoque,$obs,$fornecedor, $ncm,$cest,$codBeneficio,$tributacao);
         if($produto->getByCodigo(true) and $editar=="n"){
-            ?><script>resultadoNegativo("Código já existente! Favor alterar código.");</script><?php
+            ?><script>modalAviso("Erro","Código já existente! Favor alterar código.");</script><?php
             preencherCampos();
         } elseif(empty($descricao)) {
-            ?><script>resultadoNegativo("Campo Produto não pode ficar vazio.");</script><?php
+            ?><script>modalAviso("Erro","Campo 'Descrição' não pode ficar vazio.");</script><?php
             preencherCampos();
         }
         else {
             if ($editar=="s"){
                         if (!$produto->atualizar()){
-                            ?><script>resultadoNegativo("Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Atualizar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Atualizado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Atualizado com Sucesso!");</script><?php
                         } 
             }
             else{
                         if (!$produto->inserir()){
-                            ?><script>resultadoNegativo("Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
+                            ?><script>modalAviso("Erro","Erro ao Cadastrar. Se erro persistir, favor contactar o administrador.");</script><?php
                             preencherCampos();
                         } else {
-                            ?><script>resultadoPositivo("Cadastrado com Sucesso!");</script><?php
+                            ?><script>modalAviso("Sucesso","Cadastrado com Sucesso!");</script><?php
                         } 
             }
 

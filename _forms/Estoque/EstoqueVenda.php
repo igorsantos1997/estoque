@@ -175,7 +175,7 @@
             
             var Cli=$("#txtCliente").val();
             if (Cli=="" || Cli=="N/A"){ 
-                alert ("Insira um cliente!");
+                modalAviso("Erro","Insira um cliente!");
             } 
             else{
                 $("tr","#tableProdutosCaixa").each(function(indice,valor){
@@ -195,7 +195,7 @@
                     removeCaixa(valor); //depois de adicionar os valores do item no array, o item é retirado da lista.
                     $("#valorTotal").html(0);
                 });
-                if (produtos.length==0) alert("Nenhum produto inserido");
+                if (produtos.length==0) modaAviso("Erro","Nenhum produto inserido!");
                 else{
                         var codigo="";
                         var descricao;
@@ -213,7 +213,7 @@
                             codigo=codigo+valor[0]+":"+qntd+";";
                             
                           });
-                    $.post("ajaxSaidaEstoque.php",{codigo:codigo,descricao:"Vendido para CLIENTE",cliente:codCli,desconto: desconto,valorTotal: valorTotal},function(msg){ $("#result").html(msg);});
+                    $.post("ajaxSaidaEstoque.php",{codigo:codigo,descricao:"Vendido para CLIENTE",cliente:codCli,desconto: desconto,valorTotal: valorTotal},function(msg){ modalAviso("Sucesso",msg);});
                      limpaCampos();
                 }
             }
@@ -300,7 +300,8 @@
             </tr>
         </table>
     </body>
-             <script src="../../_lib/jquery/dist/jquery.js"></script>
+        <?php require_once("..".DIRECTORY_SEPARATOR."modalAviso.php"); ?>
+        <script src="../../_lib/jquery/dist/jquery.js"></script>
         <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
         <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
 </html>

@@ -31,6 +31,10 @@
     <script src="../../_js/jquery-3.4.1.min.js"></script>
     <script src="../../_js/forms.js"></script>
         <script src="EstoqueScriptBuscas.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../_lib/bootstrap/dist/css/bootstrap.css">
     <script>
         $(function(){
            $("#btnFormAux").on("click",function(){
@@ -50,7 +54,7 @@
         <form method="post">
             <div id="controls">
                 <label for="txtCodigo">Codigo</label><input type="number" name="txtCodigo" id="txtCodigo" placeholder="Codigo" class="txtBox">
-                <button id="btnFormAux" class="btnLupa" type="button"></button>
+                <button id="btnFormAux" class="btnLupa" type="button" data-toggle="modal" data-target="#modalBuscaProduto"></button>
                 <label for="txtProduto">Produto</label><input type="text" name="txtProduto" id="txtProduto" placeholder="Produto" class="txtBox" disabled><br>
                 <label for="txtPreco">Preço Total</label><input type="number" name="txtPreco" id="txtPreco" placeholder="Preço" class="txtBox">
                 <label for="txtQntd">Quantidade</label><input type="number" name="txtQntd" id="txtQntd" placeholder="Quantidade" class="txtBox">
@@ -58,9 +62,8 @@
             </div>
             <button id="btnCadastrar">Cadastrar</button>
         </form>
-        
-        
-        
-        
     </body>
+        <script src="../../_lib/jquery/dist/jquery.js"></script>
+    <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
+    <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
 </html>

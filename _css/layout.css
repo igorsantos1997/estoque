@@ -112,33 +112,7 @@ input[type="checkbox"]{
     text-align: center;
     color:#333;
 }
-#btnCadastrar{
-    display: block;
-    width: 90%;
-    height: 40px;
-    margin: 10px auto;
 
-}
-
-#btnBuscar,#btnBuscarCli{
-    width: 200px;
-    height: 40px;
-    margin: 10px auto;
-}
-button{
-    background-color: #d3d3d3;
-    border-radius: 5px;
-    font-size: 1.2em;
-    color: #333; 
-    outline: none;
-    transition: .4s;
-    cursor: pointer;
-}
-button:hover{
-    background-color: rgb(100,100,100);
-    color : #d3d3d3;
-    
-}
 .separator{
     font-size: 1.25em;
     margin-left: 10px;
