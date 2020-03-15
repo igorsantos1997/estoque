@@ -53,8 +53,6 @@
         </script>
     </head>
         <?php require_once ("..".DIRECTORY_SEPARATOR."forms_auxilio".DIRECTORY_SEPARATOR."formAuxilioFornecedor.php")?>
-        <div id="resultadoPositivo"></div>
-        <div id="resultadoNegativo"></div>
         <p class="form_titulo">Cadastro de Fornecedor</p>
     <form method="post">
       <div class="form-row">

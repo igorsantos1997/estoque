@@ -10,11 +10,3 @@ $(function(){
             else if (classe=="optNumero") $("#txtBusca").attr({type: "number"});
             else if (classe=="optTexto") $("#txtBusca").attr({type: "text"});
         }
-        function resultadoPositivo(text){
-        $("#resultadoPositivo").css({display: "block"});
-        $("#resultadoPositivo").html(text);
-    }
-        function resultadoNegativo(text){
-        $("#resultadoNegativo").css({display: "block"});
-        $("#resultadoNegativo").html(text);
-    }

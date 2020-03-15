@@ -49,7 +49,7 @@
             $param=array(
             ":CODIGO"=>$this->getCodigo()
             );
-            $stmt=$this->sql->query($query,$params);
+            $stmt=$this->sql->query($query,$param);
             if ($stmt->rowCount()>0){
                 return true;
             } else{

@@ -67,7 +67,7 @@
         </nav>
 
         
-            <iframe id="frame_conteudo" src="" width="100%" height="95%" style="margin: 0 auto;"></iframe>
+            <iframe id="frame_conteudo" src="home.php" width="100%" height="95%" style="margin: 0 auto;"></iframe>
         
     <script src="_lib/jquery/dist/jquery.js"></script>
     <script src="_lib/popper.js/dist/umd/popper.js"></script>

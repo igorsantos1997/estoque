@@ -8,11 +8,35 @@
         <meta charset="utf-8">
         <script>
             $(function(){
-                $("#btnFormAuxCli").on("click",function(){
-                
-                //$(".form_busca_cliente").css({display: "block"});                     
+                $("#btnExcluir").hide();
+                $("#btnExcluir").on("click",function(){
+                    modalConfirm("Excluir","Confirmar Exclusão?","excluir");
+                });
+                $("#modalConfirmSim").on("click",function(){
+                    var nome=$("#modalConfirmSim").prop("name");
+                    if (nome=="excluir"){
+                        
+                       $.post("ajax/ajaxApagaCliente.php",{codigo: $("#txtCodigoCli").val()}).done(function(result){
+                            resetCampos();
+                            resetFormCliente();
+                           if (result=="apagado"){
+                               modalAviso("Sucesso","Apagado com sucesso!");
+                           } else if (result=="erro"){
+                               modalAviso("Erro","Erro ao apagar! Se erro persistir, favor contactar o adminstrador.");
+                           }
+                           else if (result=="codigo_nao_encontrado"){
+                               modalAviso("Erro","Código não encontrado. Favor verificar campo código!");
+                           }
+                       });
+                    }
                 });
             });
+            function resetCampos(){
+                $("input").each(function(){
+                    $(this).val("");
+                });
+                $("#btnExcluir").hide();
+            }
             function buscarCli(){
                 var codigo=$("#txtCodigoCli").val();
                 var campo="cod";
@@ -44,14 +68,12 @@
                 });
                 $("#txtEditar").prop("value","s");
                 $("#btnCadastrar").html("Editar");
-                
+                $("#btnExcluir").show();
             }
         </script>
     </head>
     <body>
         <?php require_once ("..".DIRECTORY_SEPARATOR."forms_auxilio".DIRECTORY_SEPARATOR."formAuxilioCliente.php")?>
-        <div id="resultadoPositivo"></div>
-        <div id="resultadoNegativo"></div>
         <p class="form_titulo">Cadastrar/editar Cliente Pessoa Física</p>
         <div id="resultado"></div>
             <form method="post">
@@ -113,14 +135,18 @@
                 <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
                     </div></div>
                 <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-                <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
+                <div class="form-row">
+                    <button id="btnCadastrar" class="btn btn-primary ml-4">Cadastrar</button>
+                    <button id="btnExcluir" type="button" class="btn btn-danger ml-auto mr-4">Excluir</button>
+                </div>
+               
             </form>
          <script src="../../_lib/jquery/dist/jquery.js"></script>
         <script src="../../_lib/popper.js/dist/umd/popper.js"></script>
         <script src="../../_lib/bootstrap/dist/js/bootstrap.js"></script>
     </body>
     <?php 
-        require_once("..".DIRECTORY_SEPARATOR."modalAviso.php");
+        require_once("..".DIRECTORY_SEPARATOR."modalAviso.php");require_once("..".DIRECTORY_SEPARATOR."modalAviso.php");
     ?>
 </html>
 <?php
