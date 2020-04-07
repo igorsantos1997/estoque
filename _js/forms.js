@@ -10,3 +10,9 @@ $(function(){
             else if (classe=="optNumero") $("#txtBusca").attr({type: "number"});
             else if (classe=="optTexto") $("#txtBusca").attr({type: "text"});
         }
+            function resetCampos(){
+                $("input").each(function(){
+                    $(this).val("");
+                });
+                $("#btnExcluir").hide();
+            }

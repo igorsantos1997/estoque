@@ -16,6 +16,7 @@
         });
         resetFormFornecedor();
     });
+    
     function resetFormFornecedor(){
         $("#txtFormAuxBuscaFornecedor").val("");
         $.post("../forms_auxilio/ajaxformAuxiliobusca.php",{ fornecedor: "", form: "fornecedor"},function(msg){                                     $("#tableBuscaFornecedor").html(msg); 

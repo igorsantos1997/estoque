@@ -11,7 +11,35 @@
                 
                 $(".form_busca_produto").css({display: "block"});                     
                 });
+                $("#btnExcluir").hide();
+                $("#btnExcluir").on("click",function(){
+                    modalConfirm("Excluir","Confirmar Exclusão?","excluir");
+                });
+                $("#modalConfirmSim").on("click",function(){
+                    var nome=$("#modalConfirmSim").prop("name");
+                    if (nome=="excluir"){
+                        
+                       $.post("ajax/ajaxApagaProduto.php",{codigo: $("#txtCodigo").val()}).done(function(result){
+                            resetCampos();
+                            resetFormProduto();
+                           if (result=="apagado"){
+                               modalAviso("Sucesso","Apagado com sucesso!");
+                           } else if (result=="erro"){
+                               modalAviso("Erro","Erro ao apagar! Se erro persistir, favor contactar o adminstrador.");
+                           }
+                           else if (result=="codigo_nao_encontrado"){
+                               modalAviso("Erro","Código não encontrado. Favor verificar campo código!");
+                           }
+                       });
+                    }
+                });
             });
+            function resetCampos(){
+                $("input").each(function(){
+                    $(this).val("");
+                });
+                $("#btnExcluir").hide();
+            }
             function buscar(){
                 var codigo=$("#txtCodigo").val();
                 var campo="cod";
@@ -54,7 +82,7 @@
                 });
                 $("#txtEditar").prop("value","s");
                 $("#btnCadastrar").html("Editar");
-                
+                $("#btnExcluir").show();
             }
         </script>
     </head>
@@ -135,9 +163,8 @@
             </div>         
             <input type="hidden" name="txtEditar" id="txtEditar" value="n">
             <div class="form-row">
-                <div class="form-group col-12">
-                    <button id="btnCadastrar" class="btn btn-primary w-100">Cadastrar</button>
-                </div>
+                    <button id="btnCadastrar" class="btn btn-primary ml-2 w-25">Cadastrar</button>
+                    <button id="btnExcluir" type="button" class="btn btn-danger ml-auto mr-2 w-25">Excluir</button>
             </div>
             
         </form>

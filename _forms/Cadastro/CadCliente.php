@@ -136,8 +136,8 @@
                     </div></div>
                 <input type="hidden" name="txtEditar" id="txtEditar" value="n">
                 <div class="form-row">
-                    <button id="btnCadastrar" class="btn btn-primary ml-4">Cadastrar</button>
-                    <button id="btnExcluir" type="button" class="btn btn-danger ml-auto mr-4">Excluir</button>
+                    <button id="btnCadastrar" class="btn btn-primary ml-2 w-25">Cadastrar</button>
+                    <button id="btnExcluir" type="button" class="btn btn-danger ml-auto mr-2 w-25">Excluir</button>
                 </div>
                
             </form>

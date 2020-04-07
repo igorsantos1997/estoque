@@ -33,7 +33,7 @@
             </div>
                 </div>
                 <div class="form-group col-md-2">
-                     <button id="btnBuscar" class="btn btn-primary w-100">Buscar</button>
+                     <button id="btnBuscar" class="btn btn-primary btn-block">Buscar</button>
                 </div>
             </div>
         </form>

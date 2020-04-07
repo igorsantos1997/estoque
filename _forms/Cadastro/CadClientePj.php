@@ -11,7 +11,37 @@
                 
                 $(".form_busca_cliente_pj").css({display: "block"});                     
                 });
+                
+                $("#btnExcluir").hide();
+                $("#btnExcluir").on("click",function(){
+                    modalConfirm("Excluir","Confirmar Exclusão?","excluir");
+                });
+                $("#modalConfirmSim").on("click",function(){
+                    var nome=$("#modalConfirmSim").prop("name");
+                    if (nome=="excluir"){
+                        
+                       $.post("ajax/ajaxApagaClientePj.php",{codigo: $("#txtCodigoCliPj").val()}).done(function(result){
+                            resetCampos();
+                           resetFormClientePj();
+                           if (result=="apagado"){
+                               modalAviso("Sucesso","Apagado com sucesso!");
+                           } else if (result=="erro"){
+                               modalAviso("Erro","Erro ao apagar! Se erro persistir, favor contactar o adminstrador.");
+                           }
+                           else if (result=="codigo_nao_encontrado"){
+                               modalAviso("Erro","Código não encontrado. Favor verificar campo código!");
+                           }
+                           
+                       });
+                    }
+                });
             });
+            function resetCampos(){
+                $("input").each(function(){
+                    $(this).val("");
+                });
+                $("#btnExcluir").hide();
+            }
             function buscarCliPj(){
                 var codigo=$("#txtCodigoCliPj").val();
                 var campo="cod";
@@ -48,7 +78,7 @@
                 });
                 $("#txtEditar").prop("value","s");
                 $("#btnCadastrar").html("Editar");
-                
+                $("#btnExcluir").show();
             }
         </script>
     </head>
@@ -107,10 +137,17 @@
             </div>
         </div>
         
-        
-        <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="txtObs">Observações</label><textarea placeholder="Observações" name="txtObs" id="txtObs" class="form-control"></textarea>
+        </div>
+        </div>
         <input type="hidden" name="txtEditar" id="txtEditar" value="n">
-        <button id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
+        <div class="form-row">
+            <button id="btnCadastrar" class="btn btn-primary ml-2 w-25">Cadastrar</button>
+            <button id="btnExcluir" type="button" class="btn btn-danger ml-auto mr-2  w-25">Excluir</button>
+        </div>
+
     </form>
     <?php require_once("..".DIRECTORY_SEPARATOR."modalAviso.php"); ?>
              <script src="../../_lib/jquery/dist/jquery.js"></script>

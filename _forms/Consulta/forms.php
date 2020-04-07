@@ -8,14 +8,26 @@
 <?php
     require_once("../../config.php");
     function preencheLista($dados){
+ 
          $html="<tr>";
+            
             foreach ($dados as $indice=>$valor){
-                    if (is_array($valor)) preencheLista($valor);
-                    else $html.="<td>$valor</td>";
+                    
+                    if (is_array($valor)){
+                        
+                        preencheLista($valor);
+                        
+                    } 
+                    else{
+                        
+                        $html.="<td>$valor</td>";
+                        
+                    }
                 }
             $html.="</tr>";
+        
             ?>
-            <script>$("table").append("<?=$html?>");</script>
+            <script>$("table").append(`<?=$html?>`);</script>
         <?php  
     }
     function buscaClasse($classe){ //Os dois argumentos txt são para colocar os valores novamente no form
